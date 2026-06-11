@@ -49,27 +49,25 @@ const faqs = [
 >
   <!-- ============ 02 · HERO ============ -->
   <section class="section hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">Marketing Executive VA</p>
-        <h1 class="kinetic" aria-label="Grow your business without sacrificing the marketing.">
-          {heroWords.map((w, i) => (
-            <span class="word" style={`--i:${i}`} aria-hidden="true">{w === 'marketing.' ? <span class="scribble">marketing.</span> : w}{' '}</span>
-          ))}
-        </h1>
-        <p class="sub lede">{SITE.oneLiner}</p>
-        <div class="hero-ctas">
-          <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="hero">{CTA.direct}</a>
-          <a href={`/${SITE.leadMagnet.slug}`} class="link-arrow">{CTA.transitional}</a>
-        </div>
-        <p class="hero-microproof">Free {SITE.booking.callLength} · no pitch, no obligation</p>
+    <div class="wrap hero-center">
+      <p class="eyebrow hero-badge">Marketing Executive VA</p>
+      <h1 class="kinetic" aria-label="Grow your business without sacrificing the marketing.">
+        {heroWords.map((w, i) => (
+          <span class="word" style={`--i:${i}`} aria-hidden="true">{w === 'marketing.' ? <span class="scribble">marketing.</span> : w}{' '}</span>
+        ))}
+      </h1>
+      <p class="sub lede">{SITE.oneLiner}</p>
+      <div class="hero-ctas">
+        <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="hero">{CTA.direct}</a>
+        <a href={`/${SITE.leadMagnet.slug}`} class="link-arrow">{CTA.transitional}</a>
       </div>
+      <p class="hero-microproof">Free {SITE.booking.callLength} · no pitch, no obligation</p>
       <div class="hero-visual">
         <img
-          src="/images/hero-mockup.png"
-          alt="Laptop and phone displaying a joined-up marketing services dashboard — the kind of whole-function marketing a Marketing Executive VA runs for you"
-          width="1536"
-          height="1024"
+          src="/images/hero-device.png"
+          alt="Laptop displaying a joined-up digital marketing services dashboard — the kind of whole-function marketing a Marketing Executive VA runs for you"
+          width="1448"
+          height="1086"
           loading="eager"
           decoding="async"
           class="hero-img"
@@ -318,25 +316,40 @@ const faqs = [
 </Layout>
 
 <style>
-  /* hero */
+  /* hero — centered stack with floating device below */
   .hero {
     padding-block: clamp(40px, 7vw, 88px);
+    text-align: center;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: clamp(32px, 5vw, 64px);
+  .hero-center {
+    display: flex;
+    flex-direction: column;
     align-items: center;
   }
 
-  .hero-copy .sub {
-    margin-block: 20px 28px;
+  .hero-badge {
+    display: inline-block;
+    background: var(--tint);
+    border: 1px solid color-mix(in srgb, var(--copper) 32%, transparent);
+    border-radius: 9999px;
+    padding: 7px 16px;
+    margin: 0 0 24px;
+  }
+
+  .hero .kinetic {
+    max-width: 18ch;
+  }
+
+  .hero-center .sub {
+    margin-block: 22px 30px;
+    max-width: 54ch;
   }
 
   .hero-ctas {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 24px;
     flex-wrap: wrap;
   }
@@ -349,15 +362,15 @@ const faqs = [
 
   .hero-visual {
     width: 100%;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: 0 8px 40px rgba(28, 19, 9, 0.12);
+    max-width: 960px;
+    margin-top: clamp(40px, 6vw, 76px);
   }
 
   .hero-img {
     width: 100%;
     height: auto;
     display: block;
+    filter: drop-shadow(0 28px 50px rgba(28, 19, 9, 0.20));
   }
 
   /* trust strip */
@@ -684,7 +697,6 @@ const faqs = [
 
   /* responsive */
   @media (max-width: 880px) {
-    .hero-grid,
     .about-grid,
     .lm-grid {
       grid-template-columns: 1fr;
