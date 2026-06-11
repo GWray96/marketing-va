@@ -6,18 +6,20 @@
    ============================================================ */
 
 :root {
-  /* Palette */
-  --bg: #faf7f2;            /* Oat White — page background */
-  --surface: #f5efe6;       /* Cream — cards/panels */
-  --tint: #f2e0cc;          /* Warm Sand — trust strip, quote bands */
-  --ink: #1c1309;           /* Warm Ink — body text */
-  --stone: #6f614f;         /* Warm Stone (darkened for AA on bg) — secondary text */
-  --copper: #c9753a;        /* Copper Amber — accents, borders, large display only */
-  --copper-deep: #8c4a1f;   /* Burnt Sienna — AA-safe: buttons, small copper text */
-  --copper-darker: #6e3815; /* hover state for buttons */
-  --teal: #2e9e8f;          /* Teal Spark — decorative only (icons, hover underlines) */
-  --teal-deep: #1f6e63;     /* AA-safe teal for text-level accents */
-  --white: #faf7f2;
+  /* Palette — Violet scheme. Token names are kept from the original Copper
+     system so every component inherits; only the values are remapped to
+     violet (primary) + fuchsia (spark). AA verified on --bg. */
+  --bg: #faf8ff;            /* Lavender White — page background */
+  --surface: #f2edfb;       /* Light Lilac — cards/panels */
+  --tint: #e7defb;          /* Soft Violet — trust strip, quote bands, icon chips */
+  --ink: #1d1633;           /* Deep Violet-Ink — body text */
+  --stone: #645a85;         /* Muted Violet-Grey (AA on bg) — secondary text */
+  --copper: #7c3aed;        /* Violet — accents, borders, large display only */
+  --copper-deep: #6d28d9;   /* Deep Violet — AA-safe: buttons, small accent text */
+  --copper-darker: #5b21b6; /* hover state for buttons */
+  --teal: #db2777;          /* Fuchsia Spark — decorative only (icons, hover underlines) */
+  --teal-deep: #be185d;     /* AA-safe fuchsia for text-level accents */
+  --white: #faf8ff;
 
   /* Type */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -31,7 +33,7 @@
   --gap-section: clamp(56px, 9vw, 112px);
   --radius: 10px;
   --radius-lg: 18px;
-  --shadow-soft: 0 2px 24px rgba(28, 19, 9, 0.07);
+  --shadow-soft: 0 2px 24px rgba(29, 22, 51, 0.08);
 }
 
 *,
