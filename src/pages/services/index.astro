@@ -1,0 +1,121 @@
+---
+/**
+ * Services hub (playbook 4.1): outcome intro → card grid → proof strip → CTA.
+ * Target: "marketing services for small business" cluster.
+ */
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import { SITE, CTA } from '../../config';
+import { serviceContent } from '../../data/services';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+];
+
+const faqs = [
+  {
+    q: 'What marketing services does a small business actually need?',
+    a: 'Usually three things done consistently: a way to be found (SEO or ads), a way to convert (a clear website), and a way to follow up (email). Which three depends on your customers — that’s what the free intro call works out.',
+  },
+  {
+    q: 'Do I have to take every service?',
+    a: 'No. The subscription runs the channels your plan says are worth running — typically one to three at Starter and Growth level. Channels that don’t earn their place get cut at the quarterly review.',
+  },
+  {
+    q: 'Who does the work — you or a team?',
+    a: 'Me. One experienced operator owns strategy, execution and reporting end to end. Where a job genuinely needs a specialist (say, a developer for a complex integration), I bring one in and manage them — you still have one point of ownership.',
+  },
+];
+---
+
+<Layout
+  title="Marketing Services for Small Businesses | Marketing Executive VA"
+  description="Every marketing service a small business needs — strategy, SEO, ads, email, social, website, content, reporting — run end to end by one experienced operator."
+  path="/services"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="hub-head">
+        <p class="eyebrow">Services</p>
+        <h1>Marketing services for small businesses — with one owner</h1>
+        <p class="lede">
+          These aren’t à-la-carte services you have to assemble and manage yourself. They’re the
+          channels of one marketing function, run by one person, under one plan. Your 90-day plan
+          decides which earn a place — and the ones that don’t produce get cut.
+        </p>
+      </div>
+
+      <div class="hub-grid">
+        {serviceContent.map((s) => (
+          <a class="hub-card" href={`/services/${s.slug}`}>
+            <h2>{s.name}</h2>
+            <p>{s.headline}</p>
+            <span class="hub-more" aria-hidden="true">See what’s included →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} heading="Choosing services: what founders ask" />
+
+  <CtaBand
+    heading="Not sure which channels your business needs?"
+    sub={`That’s what the free ${SITE.booking.callLength} intro call is for. ${SITE.booking.promise}`}
+    loc="services_hub_final"
+  />
+</Layout>
+
+<style>
+  .hub-head {
+    max-width: 800px;
+    margin-block: 28px 44px;
+  }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .hub-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border-left: 4px solid var(--copper);
+    border-radius: var(--radius);
+    padding: 26px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .hub-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hub-card h2 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+  }
+
+  .hub-card p {
+    font-size: 0.92rem;
+    color: var(--stone);
+    flex: 1;
+  }
+
+  .hub-more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--copper-deep);
+  }
+</style>

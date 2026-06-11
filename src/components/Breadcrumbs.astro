@@ -1,0 +1,48 @@
+---
+import Schema from './Schema.astro';
+import { breadcrumbs } from '../lib/schema';
+
+interface Props {
+  crumbs: ReadonlyArray<{ name: string; path: string }>;
+}
+
+const { crumbs } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((c, i) => (
+      <li>
+        {i < crumbs.length - 1 ? <a href={c.path}>{c.name}</a> : <span aria-current="page">{c.name}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<Schema schema={breadcrumbs(crumbs)} />
+
+<style>
+  .crumbs {
+    font-size: 0.85rem;
+    color: var(--stone);
+  }
+
+  .crumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .crumbs li + li::before {
+    content: '›';
+    margin-right: 6px;
+    color: var(--stone);
+  }
+
+  .crumbs a {
+    color: var(--stone);
+  }
+</style>

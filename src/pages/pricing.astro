@@ -1,0 +1,293 @@
+---
+/**
+ * Pricing (playbook 4.5): tiers → what's included → comparison table (AEO "vs"
+ * queries) → risk reversal → price-objection FAQ → CTA.
+ * Target: "marketing packages for small business", cost/vs queries.
+ */
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, CTA, TIERS } from '../config';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Pricing', path: '/pricing' },
+];
+
+const faqs = [
+  {
+    q: 'How much does outsourced marketing cost for a small business?',
+    a: 'In the UK, agency retainers typically run £2,000–£10,000 a month, freelancers £300–£600 a day, and an in-house marketing manager around £35,000–£45,000 a year plus employment costs. A marketing subscription replaces those with one flat monthly fee — tiers above.',
+  },
+  {
+    q: 'Why is a subscription cheaper than an agency?',
+    a: 'No office, no account managers, no pitch teams, no margin stacked on every specialist. You pay for one senior operator’s time and ownership — the structure that produces most of an agency’s value at a fraction of its overhead.',
+  },
+  {
+    q: 'Is there a minimum term?',
+    a: 'No — rolling monthly. Marketing compounds, so most clients stay several quarters because the results build, but the contract never forces it. Cancel with a month’s notice and keep everything built.',
+  },
+  {
+    q: 'What about ad spend — is that included?',
+    a: 'Ad budgets are paid by you, directly to Google or Meta, in your own accounts — so you always own the data and there’s no markup on media. The subscription covers the strategy and management of that spend.',
+  },
+  {
+    q: 'What if I’m not happy with a piece of work?',
+    a: 'Unlimited revisions on every deliverable, as standard, at every tier. And because billing is monthly rolling, the work has to keep proving itself — the risk of quality slipping sits with me, not you.',
+  },
+];
+---
+
+<Layout
+  title="Pricing — Marketing Subscription Tiers | Marketing Executive VA"
+  description="Transparent marketing subscription pricing for small businesses — three tiers, unlimited revisions, rolling monthly. Compare the cost against an agency, a freelancer and a full-time hire."
+  path="/pricing"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="price-head">
+        <p class="eyebrow">Pricing</p>
+        <h1>One flat monthly fee. Pick the level, adjust as you grow.</h1>
+        <p class="lede">
+          No proposals, no scope negotiations, no surprise invoices. Every tier includes the same
+          guarantee: <strong>unlimited revisions on every piece of work</strong>, rolling monthly,
+          and you own every account and asset from day one.
+        </p>
+        <p class="updated">Last updated: 11 June 2026</p>
+      </div>
+
+      <div class="pricing-grid">
+        {TIERS.map((t) => (
+          <div class={`price-card card ${t.highlighted ? 'price-highlight' : ''}`}>
+            {t.highlighted && <span class="price-flag">Most chosen</span>}
+            <h2>{t.name}</h2>
+            <p class="tier-sub">{t.sub}</p>
+            <p class="tier-price">{t.price}<span class="tier-per">/month</span></p>
+            <ul>
+              {t.includes.map((line) => <li>{line}</li>)}
+            </ul>
+            <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc={`pricing_page_${t.name.toLowerCase()}`}>
+              {CTA.directShort}
+            </a>
+          </div>
+        ))}
+      </div>
+      <p class="muted price-note">
+        Not sure which level fits? That’s a five-minute conversation on the
+        <a href={SITE.booking.url}>free intro call</a> — and the honest answer is sometimes “start smaller.”
+      </p>
+    </div>
+  </section>
+
+  <!-- comparison table — built for "vs" queries and AI extraction -->
+  <section class="section compare-band">
+    <div class="wrap">
+      <p class="eyebrow">The alternatives</p>
+      <h2>How much does each way of doing marketing actually cost?</h2>
+      <p class="lede">
+        A small business has four realistic options for getting marketing done. Here’s the honest
+        comparison — including where each one genuinely wins.
+      </p>
+      <div class="compare-wrap">
+        <table class="compare">
+          <caption class="sr-caption">Marketing Executive VA vs agency vs full-time hire vs freelancers — cost and trade-offs</caption>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Marketing Executive VA</th>
+              <th scope="col">Marketing agency</th>
+              <th scope="col">Full-time marketing manager</th>
+              <th scope="col">Scattered freelancers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Typical UK cost</th>
+              <td>Flat monthly subscription (tiers above)</td>
+              <td>£2,000–£10,000+/month retainer</td>
+              <td>~£35,000–£45,000/year salary + NI, pension, software, recruitment</td>
+              <td>£300–£600/day, per specialist</td>
+            </tr>
+            <tr>
+              <th scope="row">Who owns the outcome</th>
+              <td>One person — strategy to execution to reporting</td>
+              <td>Account manager (the doers are behind them)</td>
+              <td>The hire — if they’re senior enough</td>
+              <td>Nobody — you become the coordinator</td>
+            </tr>
+            <tr>
+              <th scope="row">Breadth of skills</th>
+              <td>Full function: strategy, SEO, ads, email, web, content, reporting</td>
+              <td>Wide, but billed per service line</td>
+              <td>One person’s specialism; juniors need managing</td>
+              <td>Each narrow; gaps between them</td>
+            </tr>
+            <tr>
+              <th scope="row">Your time required</th>
+              <td>~1–2 hours a month</td>
+              <td>Briefings, approval cycles, meetings</td>
+              <td>Recruitment, management, development</td>
+              <td>High — you brief and chase each one</td>
+            </tr>
+            <tr>
+              <th scope="row">Commitment</th>
+              <td>Rolling monthly</td>
+              <td>Often 6–12 month contracts</td>
+              <td>Permanent employment</td>
+              <td>Per project</td>
+            </tr>
+            <tr>
+              <th scope="row">Honestly better when…</th>
+              <td>1–25 staff, marketing matters, nobody owns it</td>
+              <td>Big budgets needing large-scale media or production</td>
+              <td>Marketing needs a daily in-office presence</td>
+              <td>You need one narrow, one-off deliverable</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted compare-note">
+        Salary range: UK job-board salary guides for “marketing manager”, 2025–26. Agency and freelancer
+        ranges: typical published UK rates. <!-- [TODO-HUMAN] confirm/refresh citations before launch — see TODO-HUMAN.md -->
+      </p>
+    </div>
+  </section>
+
+  <!-- cost of inaction (price objection, loss-aversion) -->
+  <section class="section">
+    <div class="wrap inaction">
+      <h2>The most expensive option is the fifth one</h2>
+      <p class="lede">
+        Doing nothing also has a price: every month without working marketing is enquiries your
+        competitors collect instead — and unlike a subscription, that cost compounds and can’t be
+        cancelled. If marketing has been “next quarter” for more than a year, the honest comparison
+        isn’t subscription vs agency. It’s subscription vs another year of half-done.
+      </p>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} heading="Pricing: what founders ask" />
+
+  <CtaBand
+    heading="Get a straight answer on cost for your business"
+    sub={`Free ${SITE.booking.callLength} intro call — you’ll leave knowing what I’d recommend and what it would cost, whether or not you go ahead.`}
+    loc="pricing_final"
+  />
+</Layout>
+
+<style>
+  .price-head {
+    max-width: 800px;
+    margin-block: 28px 40px;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    align-items: start;
+  }
+
+  .price-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .price-highlight {
+    border-top: 5px solid var(--copper);
+  }
+
+  .price-flag {
+    position: absolute;
+    top: -13px;
+    right: 20px;
+    background: var(--copper-deep);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .price-card h2 {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    letter-spacing: 0;
+  }
+
+  .tier-sub {
+    font-size: 0.9rem;
+    color: var(--stone);
+    margin-bottom: 14px;
+  }
+
+  .tier-price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .tier-per {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--stone);
+  }
+
+  .price-card ul {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    flex: 1;
+  }
+
+  .price-card li {
+    padding: 9px 0;
+    border-top: 1px solid var(--tint);
+    font-size: 0.92rem;
+  }
+
+  .price-card li:last-child {
+    border-bottom: 1px solid var(--tint);
+  }
+
+  .price-card .btn {
+    align-self: flex-start;
+  }
+
+  .price-note {
+    margin-top: 24px;
+    font-size: 0.92rem;
+  }
+
+  .compare-band {
+    background: var(--surface);
+  }
+
+  .compare-band .compare-wrap {
+    margin-top: 28px;
+  }
+
+  .sr-caption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .compare-note {
+    font-size: 0.82rem;
+    margin-top: 14px;
+  }
+
+  .inaction {
+    max-width: 800px;
+  }
+</style>

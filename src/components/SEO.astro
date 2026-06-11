@@ -1,0 +1,43 @@
+---
+/**
+ * Per-page head tags. One primary intent per URL — title/description are
+ * required and must be unique (enforced by the QA checklist, not code).
+ */
+import { SITE } from '../config';
+
+interface Props {
+  title: string;
+  description: string;
+  /** path beginning with / — canonical is built from SITE.url */
+  path: string;
+  noindex?: boolean;
+  ogType?: 'website' | 'article';
+  /** ISO date strings for articles */
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const { title, description, path, noindex = false, ogType = 'website', publishedTime, modifiedTime } = Astro.props;
+const canonical = new URL(path, SITE.url).href;
+/* [TODO-HUMAN] supply a real 1200x630 og-image (public/og-default.png currently a placeholder) */
+const ogImage = new URL('/og-default.png', SITE.url).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

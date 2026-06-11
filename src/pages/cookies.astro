@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout
+  title="Cookie Policy | Marketing Executive VA"
+  description="What cookies this site uses — currently none beyond essential function — and how analytics will be handled."
+  path="/cookies"
+>
+  <section class="section">
+    <div class="wrap legal">
+      <p class="eyebrow">Legal</p>
+      <h1>Cookie policy</h1>
+      <p class="updated">Last updated: 11 June 2026</p>
+
+      <h2>The short version</h2>
+      <p>
+        This site currently sets <strong>no tracking cookies</strong>. There is no advertising
+        pixel, no cross-site tracking, and no third-party embeds that follow you around the
+        internet.
+      </p>
+
+      <h2>Analytics</h2>
+      <p>
+        [ANALYTICS TODO] The plan is privacy-respecting, cookieless analytics (aggregate page
+        counts, not individual profiles). If a tool requiring consent is ever added instead, a
+        consent banner will be added with it and this page updated — the “last updated” date above
+        is the signal.
+      </p>
+
+      <h2>Forms</h2>
+      <p>
+        Submitting a form stores the details you typed so I can reply — that’s data you give
+        deliberately, not background tracking. See the <a href="/privacy">privacy policy</a> for
+        how it’s handled.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    max-width: 720px;
+  }
+
+  .legal h2 {
+    margin-top: 36px;
+    font-size: 1.3rem;
+  }
+</style>

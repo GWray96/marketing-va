@@ -1,0 +1,184 @@
+---
+/**
+ * About (playbook 4.3): the guide, not the hero. Empathy headline → why this
+ * exists (the 9-in-10 finding) → authority → values → CTA. E-E-A-T page.
+ */
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, CTA } from '../config';
+import { person } from '../lib/schema';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+];
+---
+
+<Layout
+  title="About — Why This Service Exists | Marketing Executive VA"
+  description="I spent a year speaking with thousands of UK business owners about their marketing. Nine in ten were doing little or none — not from neglect, but because nobody owned it. This service is the answer."
+  path="/about"
+  schema={[person()]}
+>
+  <section class="section">
+    <div class="wrap about-grid">
+      <div class="about-side">
+        <ImageSlot label="Founder headshot, warm natural light, 4:5" />
+        <div class="side-facts card">
+          <h2>The short version</h2>
+          <ul>
+            <li>One operator, your whole marketing function</li>
+            <li>A year qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</li>
+            <li>Tens of thousands of calls; thousands of owner conversations</li>
+            <li>Based in the {SITE.country}, working remotely with businesses anywhere</li>
+            <!-- [TODO-HUMAN] add: real name, years in marketing, credentials/certs, notable employers -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="about-main">
+        <Breadcrumbs crumbs={crumbs} />
+        <p class="eyebrow">About</p>
+        <h1>You know marketing matters. You’ve just never had anyone own it.</h1>
+        <p class="about-open">
+          I know that’s true of most small businesses — because I heard it, first-hand, thousands of times.
+        </p>
+        <p>
+          From January 2025 to January 2026 I worked on eBay’s Start Up–Scale Up programme,
+          qualifying small and mid-size businesses for support. The job was volume: 200 to 500
+          dials a day, every working day, for a year — tens of thousands of calls, and real
+          conversations with thousands of business owners about how they find customers.
+        </p>
+        <p>
+          One pattern repeated until it was impossible to ignore: <strong>roughly nine out of ten
+          of those businesses were doing little or no marketing — or doing it half-heartedly.</strong>
+          A site nobody had touched in years. A Facebook page that stopped in 2023. A freelancer
+          who'd moved on. And almost every owner said a version of the same sentence:
+          <em>“I know we should be doing more, I just don’t have the time.”</em>
+        </p>
+        <p>
+          These weren’t bad businesses. Many were excellent — busy precisely because they were
+          good. That’s the unfairness of it: the better you are at the work, the less time you have
+          to tell anyone, and the more ground you quietly give to competitors who are louder but
+          not better.
+        </p>
+
+        <h2>Why “one person” is the answer, not the compromise</h2>
+        <p>
+          The standard advice to those owners is “hire an agency” or “hire a marketer.” But a
+          £2,000+ monthly retainer or a £40,000 salary isn’t realistic at this size — and the
+          scatter of freelancers most owners try instead just hands them a coordination job they
+          didn’t want. What a 1–25-person business actually needs is simpler:
+          <strong>one experienced person who owns the whole function</strong> — the plan, the
+          execution, and the honest report on whether it worked.
+        </p>
+        <p>
+          That’s the entire model here. I run your marketing as a monthly subscription:
+          strategy, website, search, ads, email, content, reporting — end to end, in your name,
+          with <a href="/how-it-works">unlimited revisions and no long contract</a>. You stay in
+          the loop, not in the weeds.
+        </p>
+
+        <h2>How I work</h2>
+        <ul class="values">
+          <li><strong>Honesty over theatre.</strong> The monthly report includes what didn’t work. Channels that don’t earn their place get cut, even when cutting them shrinks my to-do list.</li>
+          <li><strong>Your name on everything.</strong> Accounts, content, data — all owned by you from day one. Leaving should be clean enough that you never feel held hostage.</li>
+          <li><strong>Plain English.</strong> If a report needs a glossary, it’s a bad report.</li>
+          <li><strong>Proof before claims.</strong> This site has empty case-study slots rather than invented numbers. They’ll fill with real, named results — slowly, and honestly.</li>
+        </ul>
+
+        <p class="about-cta-line">
+          If any of this sounds like your business, the next step is a
+          {SITE.booking.callLength} conversation — {SITE.booking.promise.toLowerCase()}
+        </p>
+        <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="about_body">{CTA.direct}</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Marketing owned, moving, and reported on." loc="about_final" />
+</Layout>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .about-side {
+    position: sticky;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-facts h2 {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--stone);
+    margin-bottom: 12px;
+  }
+
+  .side-facts ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .side-facts li {
+    padding: 8px 0;
+    border-top: 1px solid var(--tint);
+    font-size: 0.9rem;
+  }
+
+  .about-main h1 {
+    margin-top: 24px;
+  }
+
+  .about-open {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin-block: 20px 24px;
+  }
+
+  .about-main h2 {
+    margin-top: 40px;
+  }
+
+  .values {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .values li {
+    padding: 12px 0;
+    border-top: 1px solid var(--tint);
+  }
+
+  .about-cta-line {
+    margin-top: 32px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 880px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .about-side {
+      position: static;
+      max-width: 420px;
+    }
+  }
+</style>

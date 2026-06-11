@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thanks
+
+Sitemap: https://www.marketingexecutiveva.co.uk/sitemap-index.xml

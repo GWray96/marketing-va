@@ -1,0 +1,16 @@
+---
+/**
+ * Renders JSON-LD. Accepts one schema object or an array.
+ * INTEGRITY RULE: no Review/AggregateRating anywhere until real reviews exist.
+ */
+interface Props {
+  schema: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const { schema } = Astro.props;
+const items = Array.isArray(schema) ? schema : [schema];
+---
+
+{items.map((item) => (
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...item })} />
+))}

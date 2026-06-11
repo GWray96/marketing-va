@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE, CTA } from '../config';
+---
+
+<Layout
+  title="Page Not Found | Marketing Executive VA"
+  description="That page doesn't exist — here's the way back."
+  path="/404"
+  noindex
+>
+  <section class="section">
+    <div class="wrap nf">
+      <p class="eyebrow">404</p>
+      <h1>That page wandered off.</h1>
+      <p class="lede">
+        No drama — here’s everything useful from one place: <a href="/services">what I run</a>,
+        <a href="/pricing">what it costs</a>, <a href="/blog">straight answers</a>, or the
+        <a href="/">homepage</a>.
+      </p>
+      <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="404">{CTA.direct}</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .nf {
+    max-width: 640px;
+    min-height: 50vh;
+  }
+
+  .nf .btn {
+    margin-top: 12px;
+  }
+</style>

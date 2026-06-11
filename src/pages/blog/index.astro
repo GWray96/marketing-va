@@ -1,0 +1,107 @@
+---
+/**
+ * Blog hub — informational cluster; every article links UP to its money page.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Blog', path: '/blog' },
+];
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Layout
+  title="Small Business Marketing, Answered | Marketing Executive VA Blog"
+  description="Straight answers to the marketing questions small business owners actually ask — costs, hiring decisions, AI tools, audits and strategy. No jargon, no filler."
+  path="/blog"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="blog-head">
+        <p class="eyebrow">Blog</p>
+        <h1>The questions founders ask, answered properly</h1>
+        <p class="lede">
+          Everything here comes from real conversations with business owners — written to give you
+          a usable answer, not to fill a content calendar.
+        </p>
+      </div>
+
+      {posts.length > 0 ? (
+        <div class="post-list">
+          {posts.map((p) => (
+            <a class="post-card" href={`/blog/${p.id}`}>
+              <p class="post-date">
+                {p.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              </p>
+              <h2>{p.data.title}</h2>
+              <p class="post-desc">{p.data.description}</p>
+              <span class="link-arrow">Read</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="muted">Articles are publishing shortly — the first batch is in edit.</p>
+      )}
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Reading about marketing is the warm-up."
+    sub="When you'd rather it was simply handled, the free intro call is the next step."
+    loc="blog_final"
+  />
+</Layout>
+
+<style>
+  .blog-head {
+    max-width: 760px;
+    margin-block: 28px 40px;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+  }
+
+  .post-card {
+    text-decoration: none;
+    color: var(--ink);
+    padding: 28px 0;
+    border-top: 1px solid var(--tint);
+  }
+
+  .post-card:last-child {
+    border-bottom: 1px solid var(--tint);
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin-bottom: 6px;
+  }
+
+  .post-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+  }
+
+  .post-card:hover h2 {
+    color: var(--copper-deep);
+  }
+
+  .post-desc {
+    color: var(--stone);
+    max-width: 65ch;
+  }
+</style>

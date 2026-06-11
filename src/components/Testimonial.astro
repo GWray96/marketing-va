@@ -1,0 +1,79 @@
+---
+/**
+ * INTEGRITY: renders a real quote when supplied, otherwise a clearly-labelled
+ * collection slot — never a fake name, face, or number.
+ * [TODO-HUMAN] supply real testimonials: name, role, business, result, photo.
+ */
+interface Props {
+  quote?: string;
+  name?: string;
+  role?: string;
+  /** path under /src/assets once supplied */
+  photo?: string;
+  placeholderNote?: string;
+}
+
+const { quote, name, role, placeholderNote = 'TESTIMONIAL — collect (ask: “What almost stopped you from working with me — and what happened instead?”)' } = Astro.props;
+const isReal = Boolean(quote && name);
+---
+
+{isReal ? (
+  <figure class="testi card">
+    <blockquote>“{quote}”</blockquote>
+    <figcaption>
+      <span class="testi-name">{name}</span>
+      {role && <span class="testi-role">{role}</span>}
+    </figcaption>
+  </figure>
+) : (
+  <div class="testi testi-slot card" aria-hidden="true">
+    <p class="slot-tag">[{placeholderNote}]</p>
+  </div>
+)}
+
+<style>
+  .testi {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .testi blockquote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    margin: 0 0 20px;
+    flex: 1;
+  }
+
+  .testi-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .testi-role {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--stone);
+  }
+
+  .testi-slot {
+    border: 2px dashed var(--stone);
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    place-items: center;
+    min-height: 180px;
+  }
+
+  .slot-tag {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-align: center;
+    max-width: 36ch;
+    margin: 0;
+  }
+</style>

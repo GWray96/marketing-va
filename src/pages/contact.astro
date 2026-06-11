@@ -1,0 +1,205 @@
+---
+/**
+ * Contact (playbook 4.6): minimal fields, "what happens next" + response time,
+ * multiple contact options, trust element beside the form.
+ * All booking CTAs route here until a booking tool is wired ([TODO-HUMAN]).
+ */
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../config';
+import { contactPage } from '../lib/schema';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Contact', path: '/contact' },
+];
+---
+
+<Layout
+  title="Book a Free Intro Call | Marketing Executive VA"
+  description={`Book a free ${SITE.booking.callLength} intro call — no pitch, no obligation. Tell me one thing about your business and you'll get a reply ${SITE.responseTime}.`}
+  path="/contact"
+  schema={[contactPage()]}
+>
+  <section class="section">
+    <div class="wrap contact-grid">
+      <div class="contact-main">
+        <Breadcrumbs crumbs={crumbs} />
+        <p class="eyebrow">Contact</p>
+        <h1>Book your free intro call</h1>
+        <p class="lede">
+          {SITE.booking.callLength}, {SITE.booking.promise.toLowerCase()} Tell me one thing about
+          your business below — that’s genuinely all the form asks.
+        </p>
+
+        <!-- [TODO-HUMAN] When a booking tool (Cal.com/Calendly) is chosen, embed it here
+             above the form so visitors can self-book instantly. -->
+
+        <form class="contact-form" data-form="contact" method="post" action="/thanks">
+          <div class="field">
+            <label for="c-name">Your name</label>
+            <input type="text" id="c-name" name="name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="c-email">Email</label>
+            <input type="email" id="c-email" name="email" required autocomplete="email" inputmode="email" />
+          </div>
+          <div class="field">
+            <label for="c-need">What’s the marketing situation? <span class="hint">one line is plenty</span></label>
+            <textarea id="c-need" name="need" rows="3" required placeholder="e.g. We get most work from referrals and the website hasn’t been touched in years."></textarea>
+          </div>
+          <button type="submit" class="btn" data-event="cta_click" data-event-loc="contact_form">Book my free intro call</button>
+        </form>
+
+        <div class="next-steps">
+          <h2>What happens next</h2>
+          <ol>
+            <li>You’ll get a personal reply {SITE.responseTime} — from me, not an autoresponder.</li>
+            <li>We find {SITE.booking.callLength} that suits you.</li>
+            <li>On the call: what you sell, who buys, what marketing exists today. You leave with a straight read on what I’d do — whether or not we work together.</li>
+          </ol>
+        </div>
+      </div>
+
+      <aside class="contact-side">
+        <div class="card">
+          <h2>Prefer email?</h2>
+          <p><a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+          <p class="muted">Replies {SITE.responseTime}.</p>
+        </div>
+        <div class="card">
+          <h2>No hard sell — by design</h2>
+          <p>
+            The subscription is rolling monthly, so persuading the wrong business to sign up would
+            only cost me later. If it’s not a fit, I’ll say so on the call and point you somewhere
+            better.
+          </p>
+        </div>
+        <div class="card">
+          <!-- [TODO-HUMAN] Replace with a real testimonial about the intro call experience once collected -->
+          <p class="slot-tag">[TESTIMONIAL — collect: one quote about what the intro call was like, to sit beside this form]</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // [FORM BACKEND TODO] Static site — wire to a form service (Formspree/Basin/
+  // Netlify Forms) or the chosen ESP. Stub: log + redirect to /thanks.
+  const form = document.querySelector<HTMLFormElement>('.contact-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.debug('[FORM BACKEND TODO] contact submission:', data);
+    window.location.href = '/thanks';
+  });
+</script>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .contact-main h1 {
+    margin-top: 24px;
+  }
+
+  .contact-form {
+    margin-top: 32px;
+    max-width: 560px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.92rem;
+    margin-bottom: 6px;
+  }
+
+  .hint {
+    font-weight: 400;
+    color: var(--stone);
+    font-size: 0.85rem;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border: 2px solid var(--stone);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-color: var(--copper-deep);
+    outline: none;
+  }
+
+  .next-steps {
+    margin-top: 44px;
+    max-width: 560px;
+  }
+
+  .next-steps h2 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    letter-spacing: 0;
+  }
+
+  .next-steps ol {
+    padding-left: 20px;
+    margin: 14px 0 0;
+  }
+
+  .next-steps li {
+    margin-bottom: 10px;
+  }
+
+  .contact-side {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: 90px;
+  }
+
+  .contact-side h2 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+  }
+
+  .contact-side p {
+    font-size: 0.92rem;
+    margin: 0 0 6px;
+  }
+
+  .slot-tag {
+    font-size: 0.85rem;
+    color: var(--stone);
+  }
+
+  @media (max-width: 880px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-side {
+      position: static;
+    }
+  }
+</style>

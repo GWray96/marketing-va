@@ -1,0 +1,92 @@
+---
+/**
+ * Resources hub — downloads gated by name + email (the brief's spec).
+ * Targets "marketing plan template" cluster (720/mo, KD 19).
+ */
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Resources', path: '/resources' },
+];
+
+const resources = await getCollection('resources');
+---
+
+<Layout
+  title="Free Marketing Templates & Resources for Small Businesses"
+  description="Free, genuinely useful marketing templates for small businesses — a one-page marketing plan and a DIY audit checklist. Enter your name and email, get the download."
+  path="/resources"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="res-head">
+        <p class="eyebrow">Free resources</p>
+        <h1>Marketing templates that respect your time</h1>
+        <p class="lede">
+          Each of these is the working version of something I use with subscription clients —
+          stripped to one or two pages, because short tools get used. Name and email gets you the
+          download; that’s the whole exchange.
+        </p>
+      </div>
+
+      <div class="res-grid">
+        {resources.map((r) => (
+          <a class="res-card card" href={`/resources/${r.id}`}>
+            <h2>{r.data.title}</h2>
+            <p>{r.data.benefit}</p>
+            <span class="link-arrow">Get the download</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Templates are the start. An owner is the fix."
+    sub="If the honest problem is time rather than know-how, the free intro call is the better next step."
+    loc="resources_final"
+  />
+</Layout>
+
+<style>
+  .res-head {
+    max-width: 760px;
+    margin-block: 28px 40px;
+  }
+
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .res-card {
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .res-card:hover {
+    box-shadow: 0 4px 28px rgba(28, 19, 9, 0.12);
+  }
+
+  .res-card h2 {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    letter-spacing: 0;
+    margin: 0;
+  }
+
+  .res-card p {
+    color: var(--stone);
+    font-size: 0.95rem;
+    flex: 1;
+  }
+</style>

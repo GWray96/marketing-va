@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout
+  title="Privacy Policy | Marketing Executive VA"
+  description="How this site collects, uses and protects your personal data — in plain English."
+  path="/privacy"
+>
+  <section class="section">
+    <div class="wrap legal">
+      <p class="eyebrow">Legal</p>
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: 11 June 2026</p>
+
+      <!-- [TODO-HUMAN] Replace bracketed entity details; have a qualified person
+           review before launch. This is a sensible plain-English starting draft,
+           not legal advice. -->
+
+      <h2>Who we are</h2>
+      <p>
+        This website is operated by [LEGAL/TRADING NAME] (“I”, “me”), based in the {SITE.country}.
+        Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+
+      <h2>What data is collected, and why</h2>
+      <ul>
+        <li><strong>Contact form:</strong> your name, email and message — used solely to reply to your enquiry.</li>
+        <li><strong>Resource downloads:</strong> your name and email — used to send the resource and occasional relevant emails. Every email includes an unsubscribe link.</li>
+        <li><strong>Analytics:</strong> [ANALYTICS TODO — name the tool once chosen]. The intention is privacy-respecting, cookie-light analytics measuring aggregate page use, not individuals.</li>
+      </ul>
+
+      <h2>Lawful basis</h2>
+      <p>
+        Enquiries are processed on the basis of legitimate interest (replying to you). Marketing
+        emails are sent on the basis of consent, which you can withdraw at any time via the
+        unsubscribe link or by emailing {SITE.email}.
+      </p>
+
+      <h2>Sharing</h2>
+      <p>
+        Your data is never sold. It is shared only with the service providers needed to run this
+        site and its email — [TODO-HUMAN: list ESP, form/booking provider, hosting once chosen] —
+        each under their own GDPR-compliant terms.
+      </p>
+
+      <h2>Retention</h2>
+      <p>
+        Enquiry emails are kept as long as needed to manage the relationship. Mailing-list data is
+        kept until you unsubscribe.
+      </p>
+
+      <h2>Your rights</h2>
+      <p>
+        Under UK GDPR you can request access to, correction of, or deletion of your personal data
+        at any time: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. You can also complain to the
+        ICO (ico.org.uk) if you believe data has been mishandled.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    max-width: 720px;
+  }
+
+  .legal h2 {
+    margin-top: 36px;
+    font-size: 1.3rem;
+  }
+</style>

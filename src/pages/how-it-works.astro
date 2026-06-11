@@ -1,0 +1,203 @@
+---
+/**
+ * The subscription model + onboarding — kills the Effort objection.
+ * Target: "marketing subscription", "marketing as a service".
+ */
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { SITE, CTA } from '../config';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'How it works', path: '/how-it-works' },
+];
+
+const faqs = [
+  {
+    q: 'What is a marketing subscription?',
+    a: 'A marketing subscription is a flat monthly fee for an experienced operator to run your marketing function — plan, execution and reporting — instead of paying agency retainers, project fees, or a full-time salary. Rolling monthly; scale up or down as the business changes.',
+  },
+  {
+    q: 'How much of my time does onboarding take?',
+    a: 'Roughly two hours in the first fortnight: the intro call, a kick-off conversation, and account access. After you approve the 90-day plan, your involvement drops to a short monthly call and the report.',
+  },
+  {
+    q: 'What do you need from me each month?',
+    a: 'Approvals and answers, not management. Expect a monthly call, occasional quick questions in between (your stories and expertise make the content good), and sign-off on anything customer-facing before it ships.',
+  },
+  {
+    q: 'Can I cancel whenever I want?',
+    a: 'Yes — the subscription is rolling monthly with no long contract. Everything built stays yours: accounts, content, tracking and documentation all live in your name from day one.',
+  },
+  {
+    q: 'What does “unlimited revisions” actually mean?',
+    a: 'Any piece of work — a page, an email, an ad, a post — gets revised until you’re happy with it, at no extra cost. It’s the simplest honest guarantee a service like this can make, and it never expires.',
+  },
+];
+---
+
+<Layout
+  title="How It Works — The Marketing Subscription | Marketing Executive VA"
+  description="How the marketing subscription works: a free intro call, a 90-day plan, then one experienced operator runs your marketing end to end. Rolling monthly, unlimited revisions."
+  path="/how-it-works"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="hiw-head">
+        <p class="eyebrow">How it works</p>
+        <h1>Marketing as a subscription — here’s the whole model</h1>
+        <p class="lede">
+          {SITE.definition} No procurement dance, no scope documents, no team to manage.
+          Here’s exactly what happens, in order.
+        </p>
+        <p class="updated">Last updated: 11 June 2026</p>
+      </div>
+
+      <ol class="timeline">
+        <li>
+          <h2>Book a free intro call <span class="t-meta">{SITE.booking.callLength} · no pitch</span></h2>
+          <p>
+            We talk about your business: what you sell, who buys, what marketing exists today and
+            what it costs you. You’ll get a straight read on whether this model fits — and if it
+            doesn’t, I’ll say so and point you somewhere better. {SITE.booking.promise}
+          </p>
+        </li>
+        <li>
+          <h2>Get your 90-day plan <span class="t-meta">week 1–2</span></h2>
+          <p>
+            I audit what you have — website, channels, tracking, past spend — and turn it into a
+            plan in plain English: the two or three channels worth your budget, what gets fixed
+            first, and what success looks like in numbers. You approve it before anything starts.
+          </p>
+        </li>
+        <li>
+          <h2>I run it <span class="t-meta">ongoing</span></h2>
+          <p>
+            Build, write, launch, optimise — end to end, inside your accounts, in your name.
+            You stay in the loop, not in the weeds: customer-facing work gets your sign-off,
+            everything else just gets done.
+          </p>
+        </li>
+        <li>
+          <h2>See what worked <span class="t-meta">monthly</span></h2>
+          <p>
+            One short report and one call a month: what ran, what it produced in enquiries, what
+            changes next. Every quarter the plan is re-cut — keep what worked, kill what didn’t.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section agreement-band">
+    <div class="wrap agreement-inner">
+      <p class="eyebrow">The agreement</p>
+      <h2>Built so the risk sits with me, not you</h2>
+      <div class="agreement-grid">
+        <div class="card">
+          <h3>Unlimited revisions</h3>
+          <p>Every piece of work gets revised until you’re happy. No revision counts, no change-request fees.</p>
+        </div>
+        <div class="card">
+          <h3>Rolling monthly</h3>
+          <p>No 6- or 12-month lock-in. The work has to keep earning your business every month.</p>
+        </div>
+        <div class="card">
+          <h3>You own everything</h3>
+          <p>Accounts, content, tracking, documentation — all in your name from day one. Leaving is clean.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FaqSection faqs={faqs} heading="The subscription: what founders ask" />
+
+  <CtaBand heading="Step one is a free call. That’s it." loc="hiw_final" />
+</Layout>
+
+<style>
+  .hiw-head {
+    max-width: 800px;
+    margin-block: 28px 12px;
+  }
+
+  .timeline {
+    list-style: none;
+    counter-reset: step;
+    margin: 40px 0 0;
+    padding: 0;
+    max-width: 800px;
+  }
+
+  .timeline li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 36px 76px;
+    border-left: 2px solid var(--tint);
+    margin-left: 26px;
+  }
+
+  .timeline li:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+
+  .timeline li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: -27px;
+    top: -4px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--copper);
+    display: grid;
+    place-items: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--copper-deep);
+  }
+
+  .timeline h2 {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+  }
+
+  .t-meta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--stone);
+    margin-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .timeline p {
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .agreement-band {
+    background: var(--surface);
+  }
+
+  .agreement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .agreement-grid .card {
+    background: var(--bg);
+  }
+</style>

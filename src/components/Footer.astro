@@ -1,0 +1,152 @@
+---
+import { SITE, CTA, SERVICES } from '../config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo">Marketing Executive <span>VA</span></p>
+        <p class="footer-oneliner">{SITE.oneLiner}</p>
+        <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="footer">{CTA.direct}</a>
+      </div>
+
+      <nav class="footer-col" aria-label="Site links">
+        <h2>Site</h2>
+        <ul>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/how-it-works">How it works</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/work">Work</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/resources">Free resources</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-col" aria-label="Service links">
+        <h2>What I run</h2>
+        <ul>
+          {SERVICES.map((s) => (
+            <li><a href={`/services/${s.slug}`}>{s.name}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li><a href="/contact">Book a free intro call</a></li>
+          <li>Replies {SITE.responseTime}</li>
+          <li>Based in the {SITE.country} · working with businesses anywhere</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© {year} {SITE.name}. <!-- [TODO-HUMAN] legal entity name + company number if registered --></span>
+      <span>
+        <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/cookies">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--surface);
+    border-top: 1px solid var(--tint);
+    margin-top: var(--gap-section);
+    padding-block: 56px 28px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+    gap: 40px;
+    margin-bottom: 44px;
+  }
+
+  .footer-logo {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-logo span {
+    color: var(--copper-deep);
+  }
+
+  .footer-oneliner {
+    font-size: 0.92rem;
+    color: var(--stone);
+    max-width: 38ch;
+    margin-bottom: 20px;
+  }
+
+  .footer-col h2 {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 14px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    font-size: 0.92rem;
+    color: var(--stone);
+  }
+
+  .footer-col a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .footer-col a:hover {
+    color: var(--copper-deep);
+    text-decoration: underline;
+    text-decoration-color: var(--teal);
+  }
+
+  .footer-base {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid var(--tint);
+    padding-top: 22px;
+    font-size: 0.85rem;
+    color: var(--stone);
+  }
+
+  .footer-base a {
+    color: var(--stone);
+  }
+
+  @media (max-width: 880px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-base {
+      flex-direction: column;
+    }
+  }
+</style>

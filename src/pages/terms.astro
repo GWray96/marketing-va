@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout
+  title="Terms of Use | Marketing Executive VA"
+  description="The terms governing use of this website and the marketing subscription service."
+  path="/terms"
+>
+  <section class="section">
+    <div class="wrap legal">
+      <p class="eyebrow">Legal</p>
+      <h1>Terms of use</h1>
+      <p class="updated">Last updated: 11 June 2026</p>
+
+      <!-- [TODO-HUMAN] Replace bracketed details; have a qualified person review
+           before launch. Plain-English starting draft, not legal advice. -->
+
+      <h2>This website</h2>
+      <p>
+        This site is operated by [LEGAL/TRADING NAME], {SITE.country}. Content is provided for
+        general information about the service; it isn’t professional advice for your specific
+        situation. Reasonable care is taken to keep information accurate and current — pages carry
+        a “last updated” date.
+      </p>
+
+      <h2>The service</h2>
+      <p>
+        The marketing subscription is governed by a separate written agreement provided before any
+        engagement starts. Headline terms as described on this site: rolling monthly billing, no
+        long-term lock-in, unlimited revisions on deliverables, and client ownership of all
+        accounts and assets created during the engagement.
+      </p>
+
+      <h2>Intellectual property</h2>
+      <p>
+        Site content (text, design, downloads) belongs to [LEGAL/TRADING NAME]. Free resources are
+        for your business’s own use — share them informally if useful, but don’t resell or rebrand
+        them.
+      </p>
+
+      <h2>Liability</h2>
+      <p>
+        Nothing on this site excludes liability that cannot lawfully be excluded. Beyond that, use
+        of the free information and resources here is at your own judgement; marketing outcomes
+        depend on factors outside any provider’s control and no specific results are guaranteed by
+        this website’s content.
+      </p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal {
+    max-width: 720px;
+  }
+
+  .legal h2 {
+    margin-top: 36px;
+    font-size: 1.3rem;
+  }
+</style>

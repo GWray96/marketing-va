@@ -1,0 +1,110 @@
+---
+/**
+ * Lead-magnet landing page (playbook 4.7): bare layout (no nav/footer links),
+ * single goal = email capture. INDEXED deliberately — "one page marketing plan"
+ * is KD 1–2 with ~180 combined UK searches/mo (see keyword-map.md).
+ */
+import Layout from '../layouts/Layout.astro';
+import LeadMagnetForm from '../components/LeadMagnetForm.astro';
+import { SITE } from '../config';
+
+const benefits = [
+  'The five questions that replace a 40-page marketing plan — answerable in under 20 minutes',
+  'A priority order: what a time-poor founder should fix first (it’s rarely “post more”)',
+  'The one number to check before spending anything on ads',
+  'A simple test for whether each marketing channel deserves to exist next quarter',
+];
+---
+
+<Layout
+  title="The Time-Poor Founder's 1-Page Marketing Plan (Free)"
+  description="A free one-page marketing plan for founders with no time: five questions, twenty minutes, and a clear priority order for what your business should do next."
+  path={`/${SITE.leadMagnet.slug}`}
+  bare
+>
+  <section class="lp">
+    <div class="lp-inner">
+      <p class="eyebrow">Free download</p>
+      <h1>The Time-Poor Founder’s <span class="scribble">1-Page</span> Marketing Plan</h1>
+      <p class="lede">
+        A one-page marketing plan is a single sheet that answers five questions — who you serve,
+        what you promise, where you show up, what you’ll do this quarter, and how you’ll know it
+        worked. Long plans get filed; one page gets executed.
+      </p>
+
+      <ul class="lp-benefits">
+        {benefits.map((b) => <li>{b}</li>)}
+      </ul>
+
+      <div class="lp-form card">
+        <LeadMagnetForm name="lead_magnet_lp" buttonLabel="Send me the plan" />
+      </div>
+
+      <p class="lp-proof">
+        Built from a year of conversations with thousands of UK business owners — where roughly
+        nine in ten were doing little or no marketing, mostly for one reason: no time, no owner.
+      </p>
+
+      <p class="lp-back"><a href="/">← Back to the main site</a></p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lp {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 48px var(--pad-x);
+  }
+
+  .lp-inner {
+    max-width: 640px;
+  }
+
+  .lp-inner h1 {
+    font-size: clamp(2rem, 4.6vw, 3rem);
+  }
+
+  .lp-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0;
+  }
+
+  .lp-benefits li {
+    padding: 10px 0 10px 32px;
+    position: relative;
+    border-top: 1px solid var(--tint);
+  }
+
+  .lp-benefits li:last-child {
+    border-bottom: 1px solid var(--tint);
+  }
+
+  .lp-benefits li::before {
+    content: '✓';
+    position: absolute;
+    left: 4px;
+    color: var(--teal-deep);
+    font-weight: 700;
+  }
+
+  .lp-form {
+    margin-block: 28px;
+  }
+
+  .lp-proof {
+    font-size: 0.9rem;
+    color: var(--stone);
+  }
+
+  .lp-back {
+    margin-top: 36px;
+    font-size: 0.85rem;
+  }
+
+  .lp-back a {
+    color: var(--stone);
+  }
+</style>

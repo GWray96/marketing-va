@@ -1,0 +1,88 @@
+---
+/**
+ * Email-only capture for the transitional (micro) conversion.
+ * [TODO-HUMAN] Wire to a real ESP — until then submissions are stubbed
+ * client-side and the visitor is sent to /thanks.
+ */
+import { SITE } from '../config';
+
+interface Props {
+  /** analytics form name */
+  name?: string;
+  buttonLabel?: string;
+}
+
+const { name = 'lead_magnet', buttonLabel = 'Send me the plan' } = Astro.props;
+---
+
+<form class="lm-form" data-form={name} method="post" action="/thanks">
+  <label class="lm-label" for={`${name}-email`}>Your email</label>
+  <div class="lm-row">
+    <input
+      type="email"
+      id={`${name}-email`}
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="you@yourbusiness.co.uk"
+      inputmode="email"
+    />
+    <button type="submit" class="btn">{buttonLabel}</button>
+  </div>
+  <p class="lm-trust">One email with the plan. No sequence-bombing — unsubscribe any time.</p>
+</form>
+
+<script>
+  // [ESP TODO] Replace this stub with the real provider call
+  // (e.g. fetch POST to ConvertKit/MailerLite/Brevo endpoint), keep the redirect.
+  document.querySelectorAll<HTMLFormElement>('.lm-form').forEach((form) => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = (form.querySelector('input[type="email"]') as HTMLInputElement).value;
+      console.debug('[ESP TODO] capture:', email);
+      (window as any).trackEvent?.('lead_magnet_download');
+      window.location.href = '/thanks';
+    });
+  });
+</script>
+
+<style>
+  .lm-form {
+    max-width: 480px;
+  }
+
+  .lm-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .lm-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .lm-row input {
+    flex: 1 1 220px;
+    padding: 14px 16px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border: 2px solid var(--stone);
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .lm-row input:focus {
+    border-color: var(--copper-deep);
+    outline: none;
+  }
+
+  .lm-trust {
+    font-size: 0.82rem;
+    color: var(--stone);
+    margin-top: 10px;
+  }
+</style>

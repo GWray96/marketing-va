@@ -1,0 +1,693 @@
+---
+/**
+ * Homepage. Structure = approved wireframe (hero → trust → problem → how-it-works
+ * → services → about → work → testimonials → pricing → final CTA), with the
+ * playbook's FAQ / lead-magnet / stakes blocks added before the final CTA.
+ * Primary keyword: "outsourced marketing" cluster; brand term defined for AEO.
+ */
+import Layout from '../layouts/Layout.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import Testimonial from '../components/Testimonial.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import LeadMagnetForm from '../components/LeadMagnetForm.astro';
+import { SITE, CTA, SERVICES, TIERS } from '../config';
+
+const heroWords = 'Grow your business without sacrificing the marketing.'.split(' ');
+
+const faqs = [
+  {
+    q: 'What is a Marketing Executive VA?',
+    a: SITE.definition + ' One senior person owns the plan, does the work, and reports on it — instead of you juggling freelancers or paying agency overheads.',
+  },
+  {
+    q: 'Can one person really run my whole marketing function?',
+    a: 'Yes — at small-business scale, marketing fails from lack of ownership, not lack of hands. One experienced operator running strategy, execution and reporting end to end beats a scatter of specialists nobody coordinates. When a job genuinely needs a specialist, I bring one in and manage them.',
+  },
+  {
+    q: 'How much does it cost compared to an agency or a hire?',
+    a: 'A subscription costs a fraction of either. UK marketing managers average around £40,000+ a year before NI, pension and software; agency retainers commonly run £2,000–£10,000 a month. Tiers and what each includes are on the pricing page — no hidden extras.',
+  },
+  {
+    q: 'Will this work for my kind of business?',
+    a: 'It’s built for owner-run businesses with roughly 1–25 staff — service businesses, local businesses, consultancies and DTC brands — where marketing matters but nobody owns it. The free intro call exists to answer exactly this question honestly; if it’s not a fit, I’ll say so.',
+  },
+  {
+    q: 'How much of my time will this take?',
+    a: 'Almost none — that’s the point. After a kick-off call and a 90-day plan you approve, I run the work. You stay in the loop with a short monthly report and a call, not in the weeds approving every task.',
+  },
+  {
+    q: 'What if I don’t like a piece of work?',
+    a: 'Unlimited revisions on every piece of work, as standard. The subscription is rolling monthly with no long contract, so the incentive to keep you happy never expires.',
+  },
+];
+---
+
+<Layout
+  title="Marketing Executive VA — your whole marketing department, one person"
+  description={`${SITE.definition} Free 30-minute intro call.`}
+  path="/"
+>
+  <!-- ============ 02 · HERO ============ -->
+  <section class="section hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Marketing Executive VA</p>
+        <h1 class="kinetic" aria-label="Grow your business without sacrificing the marketing.">
+          {heroWords.map((w, i) => (
+            <span class="word" style={`--i:${i}`} aria-hidden="true">{w === 'marketing.' ? <span class="scribble">marketing.</span> : w}{' '}</span>
+          ))}
+        </h1>
+        <p class="sub lede">{SITE.oneLiner}</p>
+        <div class="hero-ctas">
+          <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc="hero">{CTA.direct}</a>
+          <a href={`/${SITE.leadMagnet.slug}`} class="link-arrow">{CTA.transitional}</a>
+        </div>
+        <p class="hero-microproof">Free {SITE.booking.callLength} · no pitch, no obligation</p>
+      </div>
+      <ImageSlot label="Founder portrait, warm natural light, candid working pose, 4:5" class="hero-visual" />
+    </div>
+  </section>
+
+  <!-- ============ 02b · TRUST STRIP ============
+       Integrity: no client-logo spread until real logos exist — replaced with
+       the founder's real, verifiable numbers (playbook: stat beats empty logos). -->
+  <section class="trust-strip" aria-label="Why trust this service">
+    <div class="wrap trust-row">
+      <div class="trust-item">
+        <span class="trust-num">A year</span>
+        <span class="trust-label">qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num">Thousands</span>
+        <span class="trust-label">of conversations with business owners about their marketing</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num">9 in 10</span>
+        <span class="trust-label">were doing little or no marketing — that finding is why this service exists</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num">1 person</span>
+        <span class="trust-label">owning your whole marketing function, end to end</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · THE PROBLEM ============ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="problem-head">
+        <p class="eyebrow">The gap</p>
+        <h2>Marketing is everyone’s job at your business. So it’s no one’s.</h2>
+        <p class="lede">
+          You know it matters — you’ve just never had the time. So it happens in scraps: a burst of posts,
+          a freelancer here, a tool subscription there. Then it stalls, and the guilt sets back in.
+          It’s not your fault. Half-done marketing is what happens when nobody owns it.
+        </p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-item">
+          <h3>You’re stretched too thin</h3>
+          <p>You’re running the business <em>and</em> the marketing on the side. Neither gets what it needs — and the marketing always loses.</p>
+        </div>
+        <div class="problem-item">
+          <h3>The pieces don’t connect</h3>
+          <p>An SEO freelancer here, an ads person there, a half-set-up CRM. Everyone does their bit; nobody holds the whole picture.</p>
+        </div>
+        <div class="problem-item">
+          <h3>No one owns the outcome</h3>
+          <p>Results stall because no single person is responsible for the whole funnel — from plan to execution to “did it actually work?”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · HOW IT WORKS (the plan — effort objection) ============ -->
+  <section class="section how" id="how">
+    <div class="wrap">
+      <p class="eyebrow">The process</p>
+      <h2>From scattered to handled, in four steps</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <h3>Book a free intro call</h3>
+          <p>{SITE.booking.callLength}, no pitch. We map what you have, what’s missing, and what’s actually driving revenue.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <h3>Get your 90-day plan</h3>
+          <p>A clear plan in plain English: priorities, channels, and what gets done first. You approve it before anything starts.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <h3>I run it</h3>
+          <p>Build, launch, optimise — end to end. You stay in the loop, not in the weeds.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <h3>See what worked</h3>
+          <p>One short monthly report: what worked, what didn’t, what we shift next. No dashboard junk.</p>
+        </div>
+      </div>
+      <p class="agreement">Rolling monthly · unlimited revisions on every piece of work · cancel any time</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 · SERVICES (modular grid) ============ -->
+  <section class="section services" id="services">
+    <div class="wrap">
+      <div class="services-head">
+        <div>
+          <p class="eyebrow">What I run</p>
+          <h2>One person. The whole marketing function.</h2>
+        </div>
+        <p class="services-sub">
+          Not a menu you assemble yourself — a function with an owner. We run the channels your
+          customers actually use, and skip the ones they don’t.
+        </p>
+      </div>
+      <div class="services-grid">
+        {SERVICES.map((s) => (
+          <a class="service-card" href={`/services/${s.slug}`}>
+            <h3>{s.name}</h3>
+            <p>{s.short}</p>
+            <span class="service-more" aria-hidden="true">More →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · ABOUT / THE GUIDE (empathy + authority) ============ -->
+  <section class="section about" id="about">
+    <div class="wrap about-grid">
+      <!-- Deliberately not a second photo: one real founder photo lives in the hero
+           (and again on /about). This block carries the finding instead. -->
+      <figure class="about-stat card" aria-label="The founding insight">
+        <p class="stat-num">9<span class="stat-of"> in </span>10</p>
+        <figcaption>
+          businesses I spoke with were doing little or no marketing — not from neglect,
+          but because <strong>nobody owned it</strong>.
+        </figcaption>
+        <p class="stat-src">A year of SMB qualification calls, eBay Start&nbsp;Up–Scale&nbsp;Up programme, 2025–26</p>
+      </figure>
+      <div class="about-copy">
+        <p class="eyebrow">Who’s behind this</p>
+        <h2>I spent a year asking business owners about their marketing. Nine in ten had the same answer.</h2>
+        <p>
+          Before this, I spent a year qualifying small and mid-size businesses for eBay’s Start Up–Scale Up
+          programme — tens of thousands of calls, conversations with thousands of owners. The same story,
+          over and over: a website nobody had touched in years, a freelancer who’d moved on, and an owner
+          saying <em>“I know we should be doing more — I just don’t have the time.”</em>
+        </p>
+        <p>
+          That finding is this service. You don’t need a five-person team or a £3,000-a-month retainer —
+          you need one experienced person who takes ownership and gets the work done.
+        </p>
+        <p><a class="link-arrow" href="/about">The full story</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · WORK / PROOF ============
+       Integrity: no fabricated case studies. Slots are labelled until real
+       client results land — see TODO-HUMAN.md for what to collect. -->
+  <section class="section work" id="work">
+    <div class="wrap">
+      <div class="work-head">
+        <div>
+          <p class="eyebrow">Results</p>
+          <h2>What “handled” looks like</h2>
+        </div>
+        <a href="/work" class="link-arrow">How engagements run</a>
+      </div>
+      <div class="work-grid">
+        <div class="work-slot card">
+          <p class="slot-tag">[CASE STUDY — collect: first client win with a before→after number, e.g. enquiries/mo, cost per lead, traffic]</p>
+        </div>
+        <div class="work-slot card">
+          <p class="slot-tag">[CASE STUDY — collect: second sector for segmented proof (fit objection — different business type to slot 1)]</p>
+        </div>
+        <div class="work-slot card">
+          <p class="slot-tag">[CASE STUDY — collect: a “felt like hiring a head of marketing” story with named quote + photo]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · TESTIMONIALS ============ -->
+  <section class="section" id="testimonials">
+    <div class="wrap">
+      <p class="eyebrow">In their words</p>
+      <h2>What working with one person feels like</h2>
+      <div class="testi-grid">
+        <!-- [TODO-HUMAN] Real testimonials exist — supply name, role, business,
+             result + photo for each and they drop straight into these slots. -->
+        <Testimonial placeholderNote="TESTIMONIAL — real quote #1: name, role, business, result" />
+        <Testimonial placeholderNote="TESTIMONIAL — real quote #2: name, role, business, result" />
+        <Testimonial placeholderNote="TESTIMONIAL — real quote #3: name, role, business, result" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 09 · PRICING ============ -->
+  <section class="section pricing" id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Packages</p>
+      <h2>Pick a level. Adjust as you grow.</h2>
+      <p class="lede">
+        Every tier costs less than the payroll cost of a junior hire — and a fraction of an agency
+        retainer. <a href="/pricing">Full pricing breakdown and comparison</a>.
+      </p>
+      <div class="pricing-grid">
+        {TIERS.map((t) => (
+          <div class={`price-card card ${t.highlighted ? 'price-highlight' : ''}`}>
+            {t.highlighted && <span class="price-flag">Most chosen</span>}
+            <h3>{t.name}</h3>
+            <p class="tier-sub">{t.sub}</p>
+            <p class="tier-price">{t.price}<span class="tier-per">/month</span></p>
+            <ul>
+              {t.includes.map((line) => <li>{line}</li>)}
+            </ul>
+            <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc={`pricing_${t.name.toLowerCase()}`}>
+              {CTA.directShort}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ (playbook block 9 — objections at the friction point) ============ -->
+  <FaqSection faqs={faqs} />
+
+  <!-- ============ LEAD MAGNET (playbook block 11 — the not-ready-yet) ============ -->
+  <section class="section lm-band" aria-label="Free resource">
+    <div class="wrap lm-grid">
+      <div>
+        <p class="eyebrow">Not ready for a call?</p>
+        <h2>{SITE.leadMagnet.title}</h2>
+        <p class="lede">{SITE.leadMagnet.benefit} Free, and genuinely one page.</p>
+      </div>
+      <LeadMagnetForm name="lead_magnet_home" />
+    </div>
+  </section>
+
+  <!-- ============ STAKES (playbook block 12) + FINAL CTA (block 13) ============ -->
+  <section class="section stakes">
+    <div class="wrap stakes-inner">
+      <h2>Half-done marketing doesn’t stand still. It compounds.</h2>
+      <p class="lede">
+        Every month without a working marketing function is pipeline your competitors collect instead —
+        and the gap gets harder to close. The other version of this year: marketing owned, moving, and
+        reported on, while you run the business.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand loc="home_final" />
+</Layout>
+
+<style>
+  /* hero */
+  .hero {
+    padding-block: clamp(40px, 7vw, 88px);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .hero-copy .sub {
+    margin-block: 20px 28px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-microproof {
+    font-size: 0.85rem;
+    color: var(--stone);
+    margin-top: 14px;
+  }
+
+  /* trust strip */
+  .trust-strip {
+    background: var(--tint);
+    padding-block: 36px;
+  }
+
+  .trust-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .trust-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--copper-deep);
+  }
+
+  .trust-label {
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  /* problem */
+  .problem-head {
+    max-width: 760px;
+    margin-bottom: 48px;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .problem-item h3 {
+    margin-bottom: 8px;
+  }
+
+  .problem-item p {
+    font-size: 0.97rem;
+  }
+
+  /* how it works */
+  .how {
+    background: var(--surface);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .step {
+    background: var(--bg);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--copper);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .step h3 {
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+  }
+
+  .step p {
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .agreement {
+    margin-top: 26px;
+    font-weight: 500;
+    color: var(--copper-deep);
+    font-size: 0.95rem;
+  }
+
+  /* services */
+  .services-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 32px;
+    margin-bottom: 40px;
+  }
+
+  .services-sub {
+    max-width: 44ch;
+    font-size: 0.97rem;
+    color: var(--stone);
+    margin: 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border-left: 4px solid var(--copper);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .service-card h3 {
+    font-size: 1.02rem;
+    margin-bottom: 6px;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--stone);
+    flex: 1;
+  }
+
+  .service-more {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--copper-deep);
+  }
+
+  /* about */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+  }
+
+  .about-stat {
+    margin: 0;
+    background: var(--tint);
+    box-shadow: none;
+    padding: 36px 32px;
+    position: sticky;
+    top: 100px;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(3rem, 6vw, 4.2rem);
+    line-height: 1;
+    color: var(--copper-deep);
+    margin: 0 0 14px;
+  }
+
+  .stat-of {
+    font-size: 0.45em;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .about-stat figcaption {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .stat-src {
+    margin: 18px 0 0;
+    font-size: 0.8rem;
+    color: var(--stone);
+  }
+
+  /* work */
+  .work-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .work-slot {
+    border: 2px dashed var(--stone);
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    place-items: center;
+    min-height: 200px;
+  }
+
+  .slot-tag {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-align: center;
+    max-width: 40ch;
+    margin: 0;
+  }
+
+  /* testimonials */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  /* pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 36px;
+    align-items: start;
+  }
+
+  .price-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .price-highlight {
+    border-top: 5px solid var(--copper);
+  }
+
+  .price-flag {
+    position: absolute;
+    top: -13px;
+    right: 20px;
+    background: var(--copper-deep);
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+
+  .tier-sub {
+    font-size: 0.9rem;
+    color: var(--stone);
+    margin-bottom: 14px;
+  }
+
+  .tier-price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+  }
+
+  .tier-per {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: var(--stone);
+  }
+
+  .price-card ul {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    flex: 1;
+  }
+
+  .price-card li {
+    padding: 9px 0;
+    border-top: 1px solid var(--tint);
+    font-size: 0.92rem;
+  }
+
+  .price-card li:last-child {
+    border-bottom: 1px solid var(--tint);
+  }
+
+  .price-card .btn {
+    align-self: flex-start;
+  }
+
+  /* lead magnet band */
+  .lm-band {
+    background: var(--surface);
+  }
+
+  .lm-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  /* stakes */
+  .stakes-inner {
+    max-width: 760px;
+  }
+
+  /* responsive */
+  @media (max-width: 880px) {
+    .hero-grid,
+    .about-grid,
+    .lm-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .trust-row,
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .problem-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services-head,
+    .work-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .trust-row,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

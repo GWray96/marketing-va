@@ -1,0 +1,46 @@
+---
+/**
+ * Post-submission page (noindex). Serves both the contact form and the
+ * lead-magnet capture until a real ESP delivers by email.
+ */
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../config';
+---
+
+<Layout
+  title="Thanks — you're in"
+  description="Submission received."
+  path="/thanks"
+  noindex
+>
+  <section class="section">
+    <div class="wrap thanks">
+      <p class="eyebrow">Done</p>
+      <h1>Got it. Here’s what happens next.</h1>
+      <p class="lede">
+        If you booked a call or sent a message, you’ll hear from me personally {SITE.responseTime}.
+      </p>
+      <p>
+        If you requested <strong>{SITE.leadMagnet.title}</strong>, it’s on its way to your inbox.
+        <!-- [TODO-HUMAN] Once the PDF exists and an ESP is wired, deliver by email.
+             Optional interim: link the file directly here. -->
+      </p>
+      <p>
+        While you’re here: <a href="/blog">the blog</a> answers the questions founders ask most,
+        and <a href="/how-it-works">how it works</a> explains the whole subscription model in two
+        minutes.
+      </p>
+      <a href="/" class="btn">Back to the site</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .thanks {
+    max-width: 680px;
+  }
+
+  .thanks .btn {
+    margin-top: 12px;
+  }
+</style>

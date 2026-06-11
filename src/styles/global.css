@@ -1,0 +1,367 @@
+/* ============================================================
+   Copper Momentum — design tokens
+   Quadrant: Warm + Active (peer-guide with momentum).
+   Source: research/design-report.md. 2026 accent trend = kinetic
+   hero headline only (~10% of the design); teal used sparingly.
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --bg: #faf7f2;            /* Oat White — page background */
+  --surface: #f5efe6;       /* Cream — cards/panels */
+  --tint: #f2e0cc;          /* Warm Sand — trust strip, quote bands */
+  --ink: #1c1309;           /* Warm Ink — body text */
+  --stone: #6f614f;         /* Warm Stone (darkened for AA on bg) — secondary text */
+  --copper: #c9753a;        /* Copper Amber — accents, borders, large display only */
+  --copper-deep: #8c4a1f;   /* Burnt Sienna — AA-safe: buttons, small copper text */
+  --copper-darker: #6e3815; /* hover state for buttons */
+  --teal: #2e9e8f;          /* Teal Spark — decorative only (icons, hover underlines) */
+  --teal-deep: #1f6e63;     /* AA-safe teal for text-level accents */
+  --white: #faf7f2;
+
+  /* Type */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'DM Sans', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --text-base: 1.0625rem;   /* 17px */
+  --leading-body: 1.6;
+
+  /* Layout — Warm+Active: generous, dynamic spacing */
+  --max: 1200px;
+  --pad-x: clamp(20px, 4vw, 48px);
+  --gap-section: clamp(56px, 9vw, 112px);
+  --radius: 10px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 2px 24px rgba(28, 19, 9, 0.07);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2.4rem, 5.4vw, 3.9rem); }
+h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); font-family: var(--font-body); font-weight: 700; letter-spacing: 0; }
+h4 { font-size: 1.05rem; font-family: var(--font-body); font-weight: 700; letter-spacing: 0; }
+
+p {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--copper-deep);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  text-decoration-color: var(--teal);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 3px solid var(--teal-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--tint);
+}
+
+/* ---------- shared layout helpers ---------- */
+
+.wrap {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: var(--pad-x);
+}
+
+.section {
+  padding-block: var(--gap-section);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--copper-deep);
+  margin: 0 0 14px;
+}
+
+.lede {
+  font-size: clamp(1.1rem, 1.8vw, 1.25rem);
+  color: var(--ink);
+  max-width: 60ch;
+}
+
+.muted {
+  color: var(--stone);
+}
+
+/* ---------- buttons ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 15px 28px;
+  background: var(--copper-deep);
+  color: var(--white);
+  border: 2px solid var(--copper-deep);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--copper-darker);
+  border-color: var(--copper-darker);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--copper-deep);
+}
+
+.btn-ghost:hover {
+  background: var(--tint);
+  color: var(--copper-darker);
+  transform: none;
+}
+
+.btn-on-copper {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.btn-on-copper:hover {
+  background: #000;
+  border-color: #000;
+}
+
+.link-arrow {
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--copper-deep);
+}
+
+.link-arrow::after {
+  content: ' →';
+}
+
+.link-arrow:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--teal);
+}
+
+/* ---------- cards ---------- */
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ---------- accessible accordion (FAQ) ---------- */
+
+details.faq {
+  border-top: 1px solid var(--tint);
+  padding: 4px 0;
+}
+
+details.faq:last-of-type {
+  border-bottom: 1px solid var(--tint);
+}
+
+details.faq summary {
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 16px 36px 16px 0;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+}
+
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--copper-deep);
+}
+
+details.faq[open] summary::after {
+  content: '–';
+}
+
+details.faq .faq-a {
+  padding: 0 0 18px;
+  max-width: 70ch;
+}
+
+/* ---------- comparison tables (AEO) ---------- */
+
+.compare-wrap {
+  overflow-x: auto;
+}
+
+table.compare {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  background: var(--bg);
+}
+
+table.compare caption {
+  text-align: left;
+  font-weight: 700;
+  padding-bottom: 10px;
+}
+
+table.compare th,
+table.compare td {
+  border: 1px solid var(--tint);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+table.compare thead th {
+  background: var(--tint);
+  font-family: var(--font-body);
+}
+
+table.compare tbody th {
+  background: var(--surface);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- kinetic hero headline (the single 2026 accent) ---------- */
+
+@keyframes word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kinetic .word {
+  display: inline-block;
+  margin-right: 0.26em;
+  animation: word-rise 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+/* stagger applied inline via --i */
+.kinetic .word {
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* ---------- freshness stamp ---------- */
+
+.updated {
+  font-size: 0.85rem;
+  color: var(--stone);
+}
+
+/* ---------- hand-drawn accent underline (personality marker) ---------- */
+
+.scribble {
+  background-image: linear-gradient(
+    104deg,
+    transparent 0.9%,
+    var(--copper) 2.4%,
+    var(--copper) 5.8%,
+    transparent 93%,
+    transparent
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 0.28em;
+  background-position: 0 92%;
+  padding: 0 0.1em;
+}
+
+/* ---------- skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--white);
+  padding: 10px 18px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}

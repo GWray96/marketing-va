@@ -1,0 +1,217 @@
+---
+/**
+ * Individual service money page (playbook 4.2) — self-contained to convert
+ * from cold search: outcome hero → problem → what's included → benefits →
+ * proof slot → FAQ → risk reversal → CTA.
+ */
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import FaqSection from '../../components/FaqSection.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import Testimonial from '../../components/Testimonial.astro';
+import { SITE, CTA } from '../../config';
+import { service as serviceSchema } from '../../lib/schema';
+import { serviceContent } from '../../data/services';
+
+export function getStaticPaths() {
+  return serviceContent.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const path = `/services/${s.slug}`;
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: s.name, path },
+];
+/* Freshness signal — update when the page content is genuinely revised. */
+const lastUpdated = '11 June 2026';
+---
+
+<Layout
+  title={s.metaTitle}
+  description={s.metaDescription}
+  path={path}
+  schema={[serviceSchema({ name: s.name, description: s.definition, path })]}
+>
+  <article>
+    <!-- hero -->
+    <section class="section svc-hero">
+      <div class="wrap">
+        <Breadcrumbs crumbs={crumbs} />
+        <div class="svc-hero-inner">
+          <p class="eyebrow">{s.name}</p>
+          <h1>{s.headline}</h1>
+          <p class="lede">{s.definition}</p>
+          <div class="svc-ctas">
+            <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc={`svc_${s.slug}_hero`}>{CTA.direct}</a>
+            <a href="/how-it-works" class="link-arrow">How the subscription works</a>
+          </div>
+          <p class="updated">Last updated: {lastUpdated}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- problem -->
+    <section class="section svc-problem">
+      <div class="wrap svc-narrow">
+        <h2>{s.problem.heading}</h2>
+        <p class="lede">{s.problem.body}</p>
+      </div>
+    </section>
+
+    <!-- what's included -->
+    <section class="section">
+      <div class="wrap svc-narrow">
+        <p class="eyebrow">What’s included</p>
+        <h2>What I actually do</h2>
+        <ul class="included">
+          {s.included.map((item) => <li>{item}</li>)}
+        </ul>
+        <p>
+          This runs as part of the <a href="/how-it-works">monthly subscription</a> — pick it as your
+          main channel or one of several. <a href="/pricing">Pricing and tiers are public</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- benefits -->
+    <section class="section svc-benefits">
+      <div class="wrap">
+        <p class="eyebrow">What changes for you</p>
+        <h2>The outcome, not the activity</h2>
+        <div class="benefit-grid">
+          {s.benefits.map((b) => (
+            <div class="card">
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- segmented proof slot (fit objection) -->
+    <section class="section">
+      <div class="wrap svc-narrow">
+        <p class="eyebrow">Proof</p>
+        <h2>Results from work like this</h2>
+        <div class="proof-grid">
+          <Testimonial placeholderNote={`TESTIMONIAL — collect from a ${s.name.toLowerCase()} engagement (specific result + name + role)`} />
+          <div class="card proof-slot">
+            <p class="slot-tag">[CASE STUDY — collect: a {s.name.toLowerCase()} win with before→after numbers. Will link from /work.]</p>
+          </div>
+        </div>
+        <p class="muted">
+          Case studies are added to <a href="/work">the work page</a> as client wins are written up —
+          honestly, with real numbers, and never before.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ (service-specific, AEO) -->
+    <FaqSection faqs={s.faqs} heading={`${s.name}: what founders ask`} />
+
+    <!-- risk reversal + CTA -->
+    <CtaBand
+      heading={`Want ${s.name.toLowerCase()} handled — properly?`}
+      loc={`svc_${s.slug}_final`}
+    />
+  </article>
+</Layout>
+
+<style>
+  .svc-hero {
+    padding-top: 28px;
+  }
+
+  .svc-hero-inner {
+    max-width: 800px;
+    margin-top: 28px;
+  }
+
+  .svc-ctas {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-block: 8px 14px;
+  }
+
+  .svc-problem {
+    background: var(--surface);
+  }
+
+  .svc-narrow {
+    max-width: 800px;
+  }
+
+  .included {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 28px;
+  }
+
+  .included li {
+    padding: 12px 0 12px 34px;
+    border-top: 1px solid var(--tint);
+    position: relative;
+  }
+
+  .included li:last-child {
+    border-bottom: 1px solid var(--tint);
+  }
+
+  .included li::before {
+    content: '✓';
+    position: absolute;
+    left: 4px;
+    color: var(--teal-deep);
+    font-weight: 700;
+  }
+
+  .svc-benefits {
+    background: var(--surface);
+  }
+
+  .benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .benefit-grid .card {
+    background: var(--bg);
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-block: 24px;
+  }
+
+  .proof-slot {
+    border: 2px dashed var(--stone);
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    place-items: center;
+    min-height: 160px;
+  }
+
+  .slot-tag {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-align: center;
+    max-width: 40ch;
+    margin: 0;
+  }
+
+  @media (max-width: 720px) {
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

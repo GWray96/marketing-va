@@ -1,0 +1,155 @@
+---
+/**
+ * Case-studies hub (playbook 4.4). INTEGRITY: launches honestly — no fabricated
+ * wins. Until real cases land, the page sells the *method* (what gets measured,
+ * what a write-up will show) and labels collection slots clearly.
+ */
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { SITE, CTA } from '../../config';
+
+const crumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Work', path: '/work' },
+];
+
+const cases = (await getCollection('work', ({ data }) => !data.placeholder)).sort(
+  (a, b) => Number(b.data.year) - Number(a.data.year)
+);
+---
+
+<Layout
+  title="Work & Results | Marketing Executive VA"
+  description="Case studies from the Marketing Executive VA subscription — real engagements, real before-and-after numbers, added as wins are written up. See how results get measured."
+  path="/work"
+>
+  <section class="section">
+    <div class="wrap">
+      <Breadcrumbs crumbs={crumbs} />
+      <div class="work-head">
+        <p class="eyebrow">Work</p>
+        <h1>Results, reported the way you’d want them reported</h1>
+        <p class="lede">
+          Every engagement here is written up the same way: where the business started, what was
+          actually done, and the before-and-after numbers — named and verifiable. Nothing gets
+          published as a “win” until the client and the data both say it is.
+        </p>
+      </div>
+
+      {cases.length > 0 ? (
+        <div class="case-grid">
+          {cases.map((c) => (
+            <a class="case-card card" href={`/work/${c.id}`}>
+              <p class="case-meta">{c.data.sector} · {c.data.year}</p>
+              <h2>{c.data.result}</h2>
+              <p>{c.data.title}</p>
+              <span class="link-arrow">Read the case study</span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="case-empty">
+          <div class="case-slot card">
+            <p class="slot-tag">[CASE STUDY — collect: first subscription client. Capture baseline numbers at kick-off — enquiries/mo, traffic, cost per lead — so the before→after is real.]</p>
+          </div>
+          <div class="case-slot card">
+            <p class="slot-tag">[CASE STUDY — collect: second client, different sector, for segmented proof against the fit objection.]</p>
+          </div>
+        </div>
+      )}
+
+      <div class="method">
+        <h2>What every case study here will show</h2>
+        <ul>
+          <li><strong>The starting point</strong> — what marketing looked like before, in numbers, not adjectives.</li>
+          <li><strong>What was done</strong> — the channels run and the decisions made, honestly including what didn’t work.</li>
+          <li><strong>Before → after</strong> — enquiries, cost per enquiry, traffic or revenue over a stated period.</li>
+          <li><strong>A named client</strong> — name, role, business. No anonymous initials, no stock faces.</li>
+        </ul>
+        <p>
+          That standard means this page fills slowly — and that everything on it can be trusted.
+          Want to see the engagement model itself? <a href="/how-it-works">How it works</a> covers
+          the plan, the reporting and the guarantee.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Be the case study competitors read in a year"
+    sub={`Free ${SITE.booking.callLength} intro call. ${SITE.booking.promise}`}
+    loc="work_final"
+  />
+</Layout>
+
+<style>
+  .work-head {
+    max-width: 800px;
+    margin-block: 28px 40px;
+  }
+
+  .case-grid,
+  .case-empty {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .case-card {
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .case-card:hover {
+    box-shadow: 0 4px 28px rgba(28, 19, 9, 0.12);
+  }
+
+  .case-meta {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--stone);
+    margin: 0;
+  }
+
+  .case-card h2 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  .case-slot {
+    border: 2px dashed var(--stone);
+    background: transparent;
+    box-shadow: none;
+    display: grid;
+    place-items: center;
+    min-height: 200px;
+  }
+
+  .slot-tag {
+    font-size: 0.85rem;
+    color: var(--stone);
+    text-align: center;
+    max-width: 44ch;
+    margin: 0;
+  }
+
+  .method {
+    max-width: 760px;
+  }
+
+  .method ul {
+    padding-left: 20px;
+    margin: 20px 0;
+  }
+
+  .method li {
+    margin-bottom: 10px;
+  }
+</style>
