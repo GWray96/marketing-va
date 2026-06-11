@@ -209,25 +209,45 @@ const faqs = [
   </script>
 
   <!-- ============ 02b · TRUST STRIP ============
-       Integrity: no client-logo spread until real logos exist — replaced with
-       the founder's real, verifiable numbers (playbook: stat beats empty logos). -->
-  <section class="trust-strip" aria-label="Why trust this service">
-    <div class="wrap trust-row">
-      <div class="trust-item">
-        <span class="trust-num">A year</span>
-        <span class="trust-label">qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</span>
+       Integrity: figures below are the founder's own real, owner-supplied
+       results and verifiable experience — no client-logo spread until real
+       logos exist (playbook: stat beats empty logos). -->
+  <section class="trust-strip" aria-label="Results and credibility">
+    <div class="wrap">
+      <!-- Tier 1 — hard results delivered -->
+      <div class="trust-results">
+        <div class="trust-result">
+          <span class="trust-rnum">6.51×</span>
+          <span class="trust-label">ROAS delivered on a paid-ads campaign</span>
+        </div>
+        <div class="trust-result">
+          <span class="trust-rnum">3,400%</span>
+          <span class="trust-label">growth in new users for a brand-new web app</span>
+        </div>
+        <div class="trust-result">
+          <span class="trust-rnum">{'<'}30 days</span>
+          <span class="trust-label">to get a client cited on ChatGPT (AI search)</span>
+        </div>
       </div>
-      <div class="trust-item">
-        <span class="trust-num">Thousands</span>
-        <span class="trust-label">of conversations with business owners about their marketing</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">9 in 10</span>
-        <span class="trust-label">were doing little or no marketing — that finding is why this service exists</span>
-      </div>
-      <div class="trust-item">
-        <span class="trust-num">1 person</span>
-        <span class="trust-label">owning your whole marketing function, end to end</span>
+
+      <!-- Tier 2 — experience &amp; credibility context -->
+      <div class="trust-row">
+        <div class="trust-item">
+          <span class="trust-num">A year</span>
+          <span class="trust-label">qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">Thousands</span>
+          <span class="trust-label">of conversations with business owners about their marketing</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">9 in 10</span>
+          <span class="trust-label">were doing little or no marketing — that finding is why this service exists</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">1 person</span>
+          <span class="trust-label">owning your whole marketing function, end to end</span>
+        </div>
       </div>
     </div>
   </section>
@@ -752,7 +772,33 @@ const faqs = [
   /* trust strip */
   .trust-strip {
     background: var(--tint);
-    padding-block: 36px;
+    padding-block: 40px;
+  }
+
+  /* Tier 1 — hard results, prominent */
+  .trust-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid color-mix(in srgb, var(--copper) 24%, transparent);
+    text-align: center;
+  }
+
+  .trust-rnum {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 3.4vw, 2.7rem);
+    line-height: 1.05;
+    color: var(--copper-deep);
+    margin-bottom: 4px;
+  }
+
+  .trust-result .trust-label {
+    max-width: 28ch;
+    margin: 0 auto;
   }
 
   .trust-row {
@@ -1091,6 +1137,13 @@ const faqs = [
     .work-head {
       flex-direction: column;
       align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .trust-results {
+      grid-template-columns: 1fr;
+      gap: 22px;
     }
   }
 
