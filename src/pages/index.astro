@@ -210,11 +210,10 @@ const faqs = [
 
   <!-- ============ 02b · TRUST STRIP ============
        Integrity: figures below are the founder's own real, owner-supplied
-       results and verifiable experience — no client-logo spread until real
-       logos exist (playbook: stat beats empty logos). -->
-  <section class="trust-strip" aria-label="Results and credibility">
+       results — no client-logo spread until real logos exist (playbook:
+       stat beats empty logos). Experience stats live in the About section. -->
+  <section class="trust-strip" aria-label="Results delivered">
     <div class="wrap">
-      <!-- Tier 1 — hard results delivered -->
       <div class="trust-results">
         <div class="trust-result">
           <span class="trust-rnum">6.51×</span>
@@ -227,26 +226,6 @@ const faqs = [
         <div class="trust-result">
           <span class="trust-rnum">{'<'}30 days</span>
           <span class="trust-label">to get a client cited on ChatGPT (AI search)</span>
-        </div>
-      </div>
-
-      <!-- Tier 2 — experience &amp; credibility context -->
-      <div class="trust-row">
-        <div class="trust-item">
-          <span class="trust-num">A year</span>
-          <span class="trust-label">qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</span>
-        </div>
-        <div class="trust-item">
-          <span class="trust-num">Thousands</span>
-          <span class="trust-label">of conversations with business owners about their marketing</span>
-        </div>
-        <div class="trust-item">
-          <span class="trust-num">9 in 10</span>
-          <span class="trust-label">were doing little or no marketing — that finding is why this service exists</span>
-        </div>
-        <div class="trust-item">
-          <span class="trust-num">1 person</span>
-          <span class="trust-label">owning your whole marketing function, end to end</span>
         </div>
       </div>
     </div>
@@ -340,16 +319,27 @@ const faqs = [
   <!-- ============ 06 · ABOUT / THE GUIDE (empathy + authority) ============ -->
   <section class="section about" id="about">
     <div class="wrap about-grid">
-      <!-- Deliberately not a second photo: one real founder photo lives in the hero
-           (and again on /about). This block carries the finding instead. -->
-      <figure class="about-stat card" aria-label="The founding insight">
-        <p class="stat-num">9<span class="stat-of"> in </span>10</p>
-        <figcaption>
-          businesses I spoke with were doing little or no marketing — not from neglect,
-          but because <strong>nobody owned it</strong>.
-        </figcaption>
-        <p class="stat-src">A year of SMB qualification calls, eBay Start&nbsp;Up–Scale&nbsp;Up programme, 2025–26</p>
-      </figure>
+      <!-- Experience / credibility figures (moved here from the trust strip).
+           Deliberately not a second photo: one real founder photo lives in the
+           hero (and again on /about). -->
+      <div class="about-stats" aria-label="Experience and credibility">
+        <div class="about-stat-item">
+          <span class="num">A year</span>
+          <span class="lbl">qualifying SMBs for eBay’s Start&nbsp;Up–Scale&nbsp;Up programme</span>
+        </div>
+        <div class="about-stat-item">
+          <span class="num">Thousands</span>
+          <span class="lbl">of conversations with business owners about their marketing</span>
+        </div>
+        <div class="about-stat-item">
+          <span class="num">9 in 10</span>
+          <span class="lbl">were doing little or no marketing — that finding is why this service exists</span>
+        </div>
+        <div class="about-stat-item">
+          <span class="num">1 person</span>
+          <span class="lbl">owning your whole marketing function, end to end</span>
+        </div>
+      </div>
       <div class="about-copy">
         <p class="eyebrow">Who’s behind this</p>
         <h2>I spent a year asking business owners about their marketing. Nine in ten had the same answer.</h2>
@@ -775,14 +765,11 @@ const faqs = [
     padding-block: 40px;
   }
 
-  /* Tier 1 — hard results, prominent */
+  /* hard results, prominent */
   .trust-results {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
-    padding-bottom: 28px;
-    margin-bottom: 28px;
-    border-bottom: 1px solid color-mix(in srgb, var(--copper) 24%, transparent);
     text-align: center;
   }
 
@@ -950,40 +937,34 @@ const faqs = [
     align-items: start;
   }
 
-  .about-stat {
-    margin: 0;
-    background: var(--tint);
-    box-shadow: none;
-    padding: 36px 32px;
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
     position: sticky;
     top: 100px;
   }
 
-  .stat-num {
+  .about-stat-item {
+    background: var(--tint);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+
+  .about-stat-item .num {
+    display: block;
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(3rem, 6vw, 4.2rem);
-    line-height: 1;
+    font-size: clamp(1.5rem, 2.4vw, 1.9rem);
+    line-height: 1.05;
     color: var(--copper-deep);
-    margin: 0 0 14px;
+    margin-bottom: 6px;
   }
 
-  .stat-of {
-    font-size: 0.45em;
-    font-style: italic;
-    font-weight: 700;
-    color: var(--ink);
-  }
-
-  .about-stat figcaption {
-    font-size: 1.05rem;
-    line-height: 1.5;
-  }
-
-  .stat-src {
-    margin: 18px 0 0;
+  .about-stat-item .lbl {
     font-size: 0.8rem;
-    color: var(--stone);
+    line-height: 1.45;
+    color: var(--ink);
   }
 
   /* work */
