@@ -13,6 +13,9 @@ export const SITE = {
   tagline: 'Your whole marketing department. One person.',
   oneLiner:
     'I help small business owners who know marketing matters but never have time for it get one experienced operator to own their whole marketing function — so they grow without hiring a team or paying agency prices.',
+  /** Short, punchy hero subline (the full StoryBrand oneLiner still runs in the footer). */
+  heroSub:
+    'One experienced operator runs your whole marketing function — without hiring a team or paying agency prices.',
   /** Answer-first entity definition — used verbatim for AEO on key pages. */
   definition:
     'A Marketing Executive VA is an experienced marketing operator who runs a small business’s entire marketing function on a monthly subscription — strategy, execution, and reporting — without the cost of an agency or a full-time hire.',
