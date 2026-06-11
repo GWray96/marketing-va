@@ -493,17 +493,32 @@ const faqs = [
       </p>
       <div class="pricing-grid">
         {TIERS.map((t) => (
-          <div class={`price-card card ${t.highlighted ? 'price-highlight' : ''}`}>
-            {t.highlighted && <span class="price-flag">Most chosen</span>}
+          <div class:list={['tier', { 'tier--featured': t.highlighted }]}>
+            {t.highlighted && <span class="tier-badge">Most chosen</span>}
             <h3>{t.name}</h3>
             <p class="tier-sub">{t.sub}</p>
-            <p class="tier-price">{t.price}<span class="tier-per">/month</span></p>
-            <ul>
-              {t.includes.map((line) => <li>{line}</li>)}
-            </ul>
-            <a href={SITE.booking.url} class="btn" data-event="cta_click" data-event-loc={`pricing_${t.name.toLowerCase()}`}>
+            <p class="tier-price">
+              <span class="tier-amount">{t.price}</span>
+              <span class="tier-per">/month</span>
+            </p>
+            <a
+              href={SITE.booking.url}
+              class:list={['btn', { 'btn-ghost': !t.highlighted }]}
+              data-event="cta_click"
+              data-event-loc={`pricing_${t.name.toLowerCase()}`}
+            >
               {CTA.directShort}
             </a>
+            <ul class="tier-features">
+              {t.includes.map((line) => (
+                <li>
+                  <span class="tier-check" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 10.5l3.2 3.2L15 6.5"/></svg>
+                  </span>
+                  {line}
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
@@ -1244,78 +1259,140 @@ const faqs = [
     margin-top: 32px;
   }
 
-  /* pricing */
+  /* pricing — modern tier cards */
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 36px;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 44px;
+    align-items: stretch;
   }
 
-  .price-card {
+  .tier {
+    position: relative;
     display: flex;
     flex-direction: column;
-    position: relative;
+    background: var(--bg);
+    border: 1px solid color-mix(in srgb, var(--ink) 9%, transparent);
+    border-radius: var(--radius-lg);
+    padding: 30px 26px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
   }
 
-  .price-highlight {
-    border-top: 5px solid var(--copper);
+  .tier:hover {
+    box-shadow: 0 14px 32px rgba(29, 22, 51, 0.10);
+    border-color: color-mix(in srgb, var(--ink) 16%, transparent);
   }
 
-  .price-flag {
+  /* featured (mid) tier — lifted + brand-coloured */
+  .tier--featured {
+    border: 1.5px solid var(--copper);
+    box-shadow: 0 20px 48px rgba(109, 40, 217, 0.18);
+  }
+
+  @media (min-width: 861px) {
+    .tier--featured {
+      transform: translateY(-12px);
+    }
+    .tier--featured:hover {
+      transform: translateY(-16px);
+    }
+  }
+
+  .tier-badge {
     position: absolute;
     top: -13px;
-    right: 20px;
-    background: var(--copper-deep);
-    color: var(--white);
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--copper), var(--copper-deep));
+    color: #fff;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 999px;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(109, 40, 217, 0.32);
+  }
+
+  .tier h3 {
+    font-size: 1.15rem;
+    margin: 0 0 6px;
   }
 
   .tier-sub {
     font-size: 0.9rem;
+    line-height: 1.45;
     color: var(--stone);
-    margin-bottom: 14px;
+    margin: 0 0 22px;
+    min-height: 2.6em;
   }
 
   .tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin: 0 0 22px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  }
+
+  .tier-amount {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 1.5rem;
-    margin-bottom: 16px;
+    font-size: 2.7rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
   }
 
   .tier-per {
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: var(--stone);
   }
 
-  .price-card ul {
+  .tier .btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .tier-features {
     list-style: none;
-    margin: 0 0 24px;
+    margin: 0;
     padding: 0;
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    flex-grow: 1;
   }
 
-  .price-card li {
-    padding: 9px 0;
-    border-top: 1px solid var(--tint);
+  .tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
     font-size: 0.92rem;
+    line-height: 1.4;
+    color: var(--ink);
   }
 
-  .price-card li:last-child {
-    border-bottom: 1px solid var(--tint);
+  .tier-check {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--tint);
+    color: var(--copper-deep);
   }
 
-  .price-card .btn {
-    align-self: flex-start;
+  .tier-check svg {
+    width: 12px;
+    height: 12px;
   }
 
   /* lead magnet band */
@@ -1374,6 +1451,16 @@ const faqs = [
 
     .bento-wide {
       grid-column: span 2;
+    }
+  }
+
+  /* pricing → single centred column on tablet/mobile */
+  @media (max-width: 860px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+      margin-inline: auto;
+      gap: 28px;
     }
   }
 

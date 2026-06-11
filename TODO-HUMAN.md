@@ -20,7 +20,7 @@
 - [ ] **OG image 1200×630** → replace placeholder `public/og-default.png` (currently auto-generated text-only)
 
 ## Offer & pricing
-- [ ] **Real tier prices** → `src/config.ts` (`TIERS[].price`) — currently `[PRICE — confirm]`
+- [x] **Real tier prices** → set in `src/config.ts` (`TIERS[].price`): Starter £500, Growth £1,000, Executive £2,000 /month. Adjust here if they change.
 - [ ] Confirm tier names/inclusions match what you'll actually deliver (edit `TIERS` in `src/config.ts`)
 - [ ] Confirm which of the 8 services you genuinely offer — delete any you don't from `src/config.ts` (`SERVICES`) and `src/data/services.ts` (both lists must match)
 

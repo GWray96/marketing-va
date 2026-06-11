@@ -111,7 +111,7 @@ export const SERVICES = [
 export const TIERS = [
   {
     name: 'Starter',
-    price: '[PRICE — confirm]',
+    price: '£500',
     sub: 'For founders getting marketing off the ground.',
     includes: [
       'Marketing audit & 90-day plan',
@@ -124,7 +124,7 @@ export const TIERS = [
   },
   {
     name: 'Growth',
-    price: '[PRICE — confirm]',
+    price: '£1,000',
     sub: 'For businesses ready to grow on more than one front.',
     includes: [
       'Everything in Starter',
@@ -137,7 +137,7 @@ export const TIERS = [
   },
   {
     name: 'Executive',
-    price: '[PRICE — confirm]',
+    price: '£2,000',
     sub: 'Your full marketing function, handled.',
     includes: [
       'Every channel owned and run',
