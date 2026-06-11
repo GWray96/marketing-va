@@ -6,7 +6,6 @@
  * Primary keyword: "outsourced marketing" cluster; brand term defined for AEO.
  */
 import Layout from '../layouts/Layout.astro';
-import ImageSlot from '../components/ImageSlot.astro';
 import Testimonial from '../components/Testimonial.astro';
 import FaqSection from '../components/FaqSection.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -65,7 +64,17 @@ const faqs = [
         </div>
         <p class="hero-microproof">Free {SITE.booking.callLength} · no pitch, no obligation</p>
       </div>
-      <ImageSlot label="Founder portrait, warm natural light, candid working pose, 4:5" class="hero-visual" />
+      <div class="hero-visual">
+        <img
+          src="/images/hero-mockup.png"
+          alt="Laptop and phone displaying a joined-up marketing services dashboard — the kind of whole-function marketing a Marketing Executive VA runs for you"
+          width="1536"
+          height="1024"
+          loading="eager"
+          decoding="async"
+          class="hero-img"
+        />
+      </div>
     </div>
   </section>
 
@@ -336,6 +345,19 @@ const faqs = [
     font-size: 0.85rem;
     color: var(--stone);
     margin-top: 14px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(28, 19, 9, 0.12);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* trust strip */
