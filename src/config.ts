@@ -16,6 +16,10 @@ export const SITE = {
   /** Short, punchy hero subline (the full StoryBrand oneLiner still runs in the footer). */
   heroSub:
     'One experienced operator runs your whole marketing function — without hiring a team or paying agency prices.',
+  /** [TODO-HUMAN] Hero social-proof caption. Confirm this reflects genuine
+   *  reviews (and swap the avatar circles for real client photos) before
+   *  launch. No rating schema is emitted until real reviews exist. */
+  socialProof: 'Trusted by the owners I work with',
   /** Answer-first entity definition — used verbatim for AEO on key pages. */
   definition:
     'A Marketing Executive VA is an experienced marketing operator who runs a small business’s entire marketing function on a monthly subscription — strategy, execution, and reporting — without the cost of an agency or a full-time hire.',

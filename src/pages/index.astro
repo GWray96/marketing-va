@@ -62,6 +62,26 @@ const faqs = [
         <a href={`/${SITE.leadMagnet.slug}`} class="link-arrow">{CTA.transitional}</a>
       </div>
       <p class="hero-microproof">Free {SITE.booking.callLength} · no pitch, no obligation</p>
+
+      <!-- Social proof — TODO-HUMAN: swap the gradient circles for real client
+           photos and confirm the rating reflects genuine reviews before launch.
+           No Review/AggregateRating schema is emitted until real reviews exist. -->
+      <div class="hero-social">
+        <div class="hsp-avatars" aria-hidden="true">
+          <span class="hsp-av"></span>
+          <span class="hsp-av"></span>
+          <span class="hsp-av"></span>
+          <span class="hsp-av"></span>
+          <span class="hsp-av"></span>
+        </div>
+        <div class="hsp-stars" aria-hidden="true">
+          {Array.from({ length: 5 }).map(() => (
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.77l-5.2 2.73.99-5.79L1.58 7.62l5.82-.85L10 1.5z"/></svg>
+          ))}
+        </div>
+        <p class="hsp-caption">{SITE.socialProof}</p>
+      </div>
+
       <div class="hero-visual">
         <img
           src="/images/hero-device.png"
@@ -463,6 +483,53 @@ const faqs = [
     font-size: 0.82rem;
     color: var(--stone);
     margin-top: 12px;
+  }
+
+  /* social proof — avatar circles + star rating (placeholder until real) */
+  .hero-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    margin-top: 18px;
+  }
+
+  .hsp-avatars {
+    display: flex;
+  }
+
+  .hsp-av {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-left: -10px;
+    box-shadow: 0 1px 4px rgba(29, 22, 51, 0.2);
+  }
+
+  .hsp-av:first-child { margin-left: 0; }
+  .hsp-av:nth-child(1) { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .hsp-av:nth-child(2) { background: linear-gradient(135deg, #db2777, #f472b6); }
+  .hsp-av:nth-child(3) { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+  .hsp-av:nth-child(4) { background: linear-gradient(135deg, #be185d, #ec4899); }
+  .hsp-av:nth-child(5) { background: linear-gradient(135deg, #7c3aed, #c026d3); }
+
+  .hsp-stars {
+    display: inline-flex;
+    gap: 3px;
+    color: #f6b73c;
+  }
+
+  .hsp-stars svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hsp-caption {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--stone);
+    margin: 0;
   }
 
   .hero-visual {

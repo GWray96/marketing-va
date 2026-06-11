@@ -34,6 +34,7 @@ The collection questions that work (playbook 5.3):
 - [ ] **Per-service testimonials** as they land → service pages (`[service].astro` proof section)
 - [ ] **First case study** — capture BASELINE NUMBERS AT KICK-OFF (enquiries/mo, traffic, cost per lead), then duplicate `src/content/work/_template-first-case.md`, fill, set `placeholder: false`
 - [ ] Client logos: only when you have several real, recognisable ones — the trust strip currently (correctly) uses your verifiable stats instead
+- [ ] **Hero social-proof widget** (avatar circles + 5 stars under the hero CTA): swap the gradient circles for real client photos, and confirm the star rating + caption (`socialProof` in `src/config.ts`) reflect genuine reviews. Until then it's a placeholder — and no `Review`/`AggregateRating` schema is emitted. Once real reviews exist, consider adding that schema.
 
 ## Tools & wiring
 - [ ] **Booking tool** (Cal.com / Calendly / other) → `src/config.ts` (`booking.url`); optionally embed on `/contact` (marked slot)
